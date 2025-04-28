@@ -11,29 +11,26 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tb_produto")
+@Table(name = "tb_pedido")
 @Data
 @EntityListeners(AuditingEntityListener.class)
-public class Produto implements Serializable {
+public class Pedido implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String nome;
+    @Column(nullable = false, precision = 18, scale = 2)
+    private BigDecimal total;
+
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
 
     @Column(nullable = false)
-    private String descricao;
+    private String enderecoEntrega;
 
     @Column(nullable = false, precision = 18, scale = 2)
-    private BigDecimal preco;
-
-    @Column(name = "quantidade_estoque", nullable = false)
-    private Integer quantidadeEstoque;
-
-    @Column(name = "imagem_url", nullable = false)
-    private String imagemUrl;
+    private BigDecimal frete;
 
     @CreatedDate
     @Column(name = "data_cadastro")
