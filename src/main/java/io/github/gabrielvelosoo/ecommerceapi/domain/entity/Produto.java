@@ -9,6 +9,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_produto")
@@ -34,6 +36,12 @@ public class Produto implements Serializable {
 
     @Column(name = "imagem_url", nullable = false)
     private String imagemUrl;
+
+    @OneToMany(mappedBy = "produto")
+    private List<ItemPedido> itensPedido = new ArrayList<>();
+
+    @OneToMany(mappedBy = "produto")
+    private List<ItemCarrinho> itensCarrinho = new ArrayList<>();
 
     @CreatedDate
     @Column(name = "data_cadastro")

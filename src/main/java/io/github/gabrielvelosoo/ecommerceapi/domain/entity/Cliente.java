@@ -1,6 +1,5 @@
 package io.github.gabrielvelosoo.ecommerceapi.domain.entity;
 
-import io.github.gabrielvelosoo.ecommerceapi.domain.enums.StatusPedido;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -8,41 +7,31 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_pedido")
+@Table(name = "tb_cliente")
 @Data
 @EntityListeners(AuditingEntityListener.class)
-public class Pedido implements Serializable {
+public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    @Column(nullable = false, length = 100)
+    private String nome;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
-    private List<ItemPedido> itens = new ArrayList<>();
+    @Column(nullable = false, unique = true, length = 11)
+    private String cpf;
 
-    @Column(nullable = false, precision = 18, scale = 2)
-    private BigDecimal total;
+    @Column(nullable = false, length = 20)
+    private String telefone;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private StatusPedido status;
-
-    @ManyToOne
-    @JoinColumn(name = "endereco_entrega_id")
-    private Endereco enderecoEntrega;
-
-    @Column(nullable = false, precision = 18, scale = 2)
-    private BigDecimal frete;
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Endereco> enderecos = new ArrayList<>();
 
     @CreatedDate
     @Column(name = "data_cadastro")
