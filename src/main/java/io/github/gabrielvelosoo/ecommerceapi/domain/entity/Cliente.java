@@ -27,7 +27,7 @@ public class Cliente implements Serializable {
     @Column(nullable = false, unique = true, length = 11)
     private String cpf;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 15)
     private String telefone;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)

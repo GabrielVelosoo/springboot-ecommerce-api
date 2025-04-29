@@ -22,7 +22,7 @@ public class Endereco implements Serializable {
     @Column(name = "nome_contato", nullable = false, length = 100)
     private String nomeContato;
 
-    @Column(name = "telefone_contato", nullable = false, length = 20)
+    @Column(name = "telefone_contato", nullable = false, length = 15)
     private String telefoneContato;
 
     @Column(nullable = false, length = 150)
@@ -37,7 +37,7 @@ public class Endereco implements Serializable {
     @Column(nullable = false, length = 100)
     private String cidade;
 
-    @Column(nullable = false, length = 2)
+    @Column(nullable = false, length = 100)
     private String estado;
 
     @Column(nullable = false, length = 8)
@@ -47,7 +47,7 @@ public class Endereco implements Serializable {
     private String complemento;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
     @CreatedDate
