@@ -37,6 +37,10 @@ public class Produto implements Serializable {
     @Column(name = "imagem_url", nullable = false)
     private String imagemUrl;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
+
     @OneToMany(mappedBy = "produto")
     private List<ItemPedido> itensPedido = new ArrayList<>();
 
