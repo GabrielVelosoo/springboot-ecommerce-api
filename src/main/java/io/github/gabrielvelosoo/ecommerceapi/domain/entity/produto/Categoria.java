@@ -8,6 +8,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_categoria")
@@ -21,6 +23,9 @@ public class Categoria implements Serializable {
 
     @Column(nullable = false,unique = true, length = 50)
     private String nome;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<Produto> produtos = new ArrayList<>();
 
     @CreatedDate
     @Column(name = "data_cadastro")

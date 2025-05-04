@@ -5,6 +5,8 @@ import io.github.gabrielvelosoo.ecommerceapi.domain.repository.produto.Categoria
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CategoriaServiceImpl implements CategoriaService {
@@ -14,5 +16,10 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public void salvarCategoria(Categoria categoria) {
         repository.save(categoria);
+    }
+
+    @Override
+    public List<Categoria> obterCategorias() {
+        return repository.findAll();
     }
 }
