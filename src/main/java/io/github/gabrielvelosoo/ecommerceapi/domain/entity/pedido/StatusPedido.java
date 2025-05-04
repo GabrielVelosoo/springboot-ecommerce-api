@@ -1,4 +1,4 @@
-package io.github.gabrielvelosoo.ecommerceapi.domain.enums;
+package io.github.gabrielvelosoo.ecommerceapi.domain.entity.pedido;
 
 public enum StatusPedido {
     PENDENTE,

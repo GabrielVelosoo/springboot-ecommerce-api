@@ -1,5 +1,6 @@
-package io.github.gabrielvelosoo.ecommerceapi.domain.entity;
+package io.github.gabrielvelosoo.ecommerceapi.domain.entity.carrinho;
 
+import io.github.gabrielvelosoo.ecommerceapi.domain.entity.produto.Produto;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,10 +12,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tb_item_pedido")
+@Table(name = "tb_item_carrinho")
 @Data
 @EntityListeners(AuditingEntityListener.class)
-public class ItemPedido implements Serializable {
+public class ItemCarrinho implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +26,8 @@ public class ItemPedido implements Serializable {
     private Produto produto;
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    private Pedido pedido;
+    @JoinColumn(name = "carrinho_id")
+    private Carrinho carrinho;
 
     @Column(nullable = false)
     private Integer quantidade;

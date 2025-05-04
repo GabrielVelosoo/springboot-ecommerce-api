@@ -1,6 +1,6 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente;
 
-import io.github.gabrielvelosoo.ecommerceapi.domain.entity.Endereco;
+import io.github.gabrielvelosoo.ecommerceapi.domain.entity.cliente.Endereco;
 
 import java.time.LocalDateTime;
 import java.util.List;

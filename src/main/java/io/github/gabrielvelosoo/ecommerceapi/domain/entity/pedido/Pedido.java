@@ -1,6 +1,7 @@
-package io.github.gabrielvelosoo.ecommerceapi.domain.entity;
+package io.github.gabrielvelosoo.ecommerceapi.domain.entity.pedido;
 
-import io.github.gabrielvelosoo.ecommerceapi.domain.enums.StatusPedido;
+import io.github.gabrielvelosoo.ecommerceapi.domain.entity.cliente.Cliente;
+import io.github.gabrielvelosoo.ecommerceapi.domain.entity.cliente.Endereco;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;

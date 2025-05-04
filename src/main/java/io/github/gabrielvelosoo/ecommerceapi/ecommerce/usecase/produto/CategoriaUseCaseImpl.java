@@ -1,6 +1,6 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.produto;
 
-import io.github.gabrielvelosoo.ecommerceapi.domain.entity.Categoria;
+import io.github.gabrielvelosoo.ecommerceapi.domain.entity.produto.Categoria;
 import io.github.gabrielvelosoo.ecommerceapi.domain.service.produto.CategoriaService;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.CategoriaRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.produto.CategoriaMapper;

@@ -1,5 +1,7 @@
-package io.github.gabrielvelosoo.ecommerceapi.domain.entity;
+package io.github.gabrielvelosoo.ecommerceapi.domain.entity.produto;
 
+import io.github.gabrielvelosoo.ecommerceapi.domain.entity.carrinho.ItemCarrinho;
+import io.github.gabrielvelosoo.ecommerceapi.domain.entity.pedido.ItemPedido;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;

@@ -1,6 +1,6 @@
 package io.github.gabrielvelosoo.ecommerceapi.domain.service.produto;
 
-import io.github.gabrielvelosoo.ecommerceapi.domain.entity.Categoria;
+import io.github.gabrielvelosoo.ecommerceapi.domain.entity.produto.Categoria;
 import io.github.gabrielvelosoo.ecommerceapi.domain.repository.produto.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

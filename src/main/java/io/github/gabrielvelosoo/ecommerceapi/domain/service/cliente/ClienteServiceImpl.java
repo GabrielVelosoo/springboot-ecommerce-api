@@ -1,6 +1,6 @@
 package io.github.gabrielvelosoo.ecommerceapi.domain.service.cliente;
 
-import io.github.gabrielvelosoo.ecommerceapi.domain.entity.Cliente;
+import io.github.gabrielvelosoo.ecommerceapi.domain.entity.cliente.Cliente;
 import io.github.gabrielvelosoo.ecommerceapi.domain.repository.cliente.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
