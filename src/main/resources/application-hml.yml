@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: ecommerce-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${DATASOURCE_DB}
+    username: ${DATASOURCE_USER}
+    password: ${DATASOURCE_PASSWORD}
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
