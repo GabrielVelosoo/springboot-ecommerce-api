@@ -17,7 +17,7 @@ public record ClienteRequestDTO(
         String cpf,
 
         @NotBlank(message = "Telefone é obrigatório")
-        @Size(min = 12, max = 15, message = "O telefone deve ter entre 12 e 15 caracteres")
+        @Size(min = 11, max = 11, message = "O telefone deve ter 11 caracteres")
         String telefone,
         List<Endereco> enderecos
     ) {
