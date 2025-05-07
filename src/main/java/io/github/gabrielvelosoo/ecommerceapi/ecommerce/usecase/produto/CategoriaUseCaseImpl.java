@@ -5,6 +5,7 @@ import io.github.gabrielvelosoo.ecommerceapi.domain.service.produto.CategoriaSer
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.CategoriaRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.CategoriaResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.produto.CategoriaMapper;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.produto.CategoriaValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,12 @@ public class CategoriaUseCaseImpl implements CategoriaUseCase {
 
     private final CategoriaService service;
     private final CategoriaMapper categoriaMapper;
+    private final CategoriaValidator validator;
 
     @Override
     public void salvarCategoria(CategoriaRequestDTO categoriaDTO) {
         Categoria categoria = categoriaMapper.toEntity(categoriaDTO);
+        validator.validar(categoria);
         service.salvarCategoria(categoria);
     }
 
