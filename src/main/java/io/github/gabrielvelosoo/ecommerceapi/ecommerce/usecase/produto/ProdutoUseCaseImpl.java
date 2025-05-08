@@ -5,6 +5,7 @@ import io.github.gabrielvelosoo.ecommerceapi.domain.service.produto.ProdutoServi
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.ProdutoRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.ProdutoResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.produto.ProdutoMapper;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.produto.ProdutoValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +15,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProdutoUseCaseImpl implements ProdutoUseCase {
 
-    private final ProdutoService service;
+    private final ProdutoService produtoService;
     private final ProdutoMapper produtoMapper;
+    private final ProdutoValidator produtoValidator;
 
     @Override
     public void salvarProduto(ProdutoRequestDTO produtoDTO) {
         Produto produto = produtoMapper.toEntity(produtoDTO);
-        service.salvaProduto(produto);
+        produtoValidator.validar(produto);
+        produtoService.salvaProduto(produto);
     }
 
     @Override
     public List<ProdutoResponseDTO> obterProdutos() {
-        List<Produto> produtos = service.obterProdutos();
+        List<Produto> produtos = produtoService.obterProdutos();
         return produtoMapper.toDTOs(produtos);
     }
 }
