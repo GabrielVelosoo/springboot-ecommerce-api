@@ -1,4 +1,4 @@
-package io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception;
+package io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.excecoes;
 
 public class RegraNegocioException extends RuntimeException {
 

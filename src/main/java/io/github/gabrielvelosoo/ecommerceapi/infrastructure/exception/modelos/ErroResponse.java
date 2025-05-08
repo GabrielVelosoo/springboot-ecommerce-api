@@ -1,4 +1,4 @@
-package io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.model;
+package io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.modelos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

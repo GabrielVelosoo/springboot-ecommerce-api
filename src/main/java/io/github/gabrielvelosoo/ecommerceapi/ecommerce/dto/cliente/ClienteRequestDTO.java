@@ -12,7 +12,7 @@ public record ClienteRequestDTO(
         @Size(min = 2, max = 100, message = "Nome deve ter entre 2 e 100 caracteres")
         String nome,
 
-        @CPF
+        @CPF(message = "Número de CPF inválido")
         @NotBlank(message = "CPF é obrigatório")
         String cpf,
 

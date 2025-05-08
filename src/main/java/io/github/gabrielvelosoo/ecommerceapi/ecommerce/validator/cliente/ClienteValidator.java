@@ -2,7 +2,7 @@ package io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.cliente;
 
 import io.github.gabrielvelosoo.ecommerceapi.domain.entity.cliente.Cliente;
 import io.github.gabrielvelosoo.ecommerceapi.domain.repository.cliente.ClienteRepository;
-import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.RegistroDuplicadoException;
+import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.excecoes.RegistroDuplicadoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
