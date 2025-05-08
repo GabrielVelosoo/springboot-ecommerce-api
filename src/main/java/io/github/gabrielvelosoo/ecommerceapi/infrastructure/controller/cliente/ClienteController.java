@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ClienteController {
 
-    private final ClienteUseCase useCase;
+    private final ClienteUseCase clienteUseCase;
 
     @PostMapping
     public ResponseEntity<Void> salvarCliente(@RequestBody @Valid ClienteRequestDTO clienteDTO) {
-        useCase.salvarCliente(clienteDTO);
+        clienteUseCase.salvarCliente(clienteDTO);
         return ResponseEntity.ok().build();
     }
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ClienteValidator {
 
-    private final ClienteRepository repository;
+    private final ClienteRepository clienteRepository;
 
     public void validar(Cliente cliente) {
         if(clientePossuiCpfCadastrado(cliente)) {
@@ -21,7 +21,7 @@ public class ClienteValidator {
     }
 
     public boolean clientePossuiCpfCadastrado(Cliente cliente) {
-        Optional<Cliente> clienteOptional = repository.findByCpf(cliente.getCpf());
+        Optional<Cliente> clienteOptional = clienteRepository.findByCpf(cliente.getCpf());
         if(cliente.getId() == null) {
             return clienteOptional.isPresent();
         }

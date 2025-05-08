@@ -15,20 +15,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoriaUseCaseImpl implements CategoriaUseCase {
 
-    private final CategoriaService service;
+    private final CategoriaService categoriaService;
     private final CategoriaMapper categoriaMapper;
-    private final CategoriaValidator validator;
+    private final CategoriaValidator categoriaValidator;
 
     @Override
     public void salvarCategoria(CategoriaRequestDTO categoriaDTO) {
         Categoria categoria = categoriaMapper.toEntity(categoriaDTO);
-        validator.validar(categoria);
-        service.salvarCategoria(categoria);
+        categoriaValidator.validar(categoria);
+        categoriaService.salvarCategoria(categoria);
     }
 
     @Override
     public List<CategoriaResponseDTO> obterCategorias() {
-        List<Categoria> categorias = service.obterCategorias();
+        List<Categoria> categorias = categoriaService.obterCategorias();
         return categoriaMapper.toDTOs(categorias);
     }
 }

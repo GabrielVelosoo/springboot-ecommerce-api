@@ -11,15 +11,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProdutoServiceImpl implements ProdutoService {
 
-    private final ProdutoRepository repository;
+    private final ProdutoRepository produtoRepository;
 
     @Override
     public void salvaProduto(Produto produto) {
-        repository.save(produto);
+        produtoRepository.save(produto);
     }
 
     @Override
     public List<Produto> obterProdutos() {
-        return repository.findAll();
+        return produtoRepository.findAll();
     }
 }

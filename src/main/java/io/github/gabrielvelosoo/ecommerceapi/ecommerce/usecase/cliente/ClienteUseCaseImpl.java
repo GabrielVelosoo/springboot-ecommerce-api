@@ -12,18 +12,18 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ClienteUseCaseImpl implements ClienteUseCase {
 
-    private final ClienteService service;
+    private final ClienteService clienteService;
     private final ClienteMapper clienteMapper;
-    private final ClienteValidator validator;
+    private final ClienteValidator clienteValidator;
 
     @Override
     public void salvarCliente(ClienteRequestDTO clienteDTO) {
         Cliente cliente = clienteMapper.toEntity(clienteDTO);
-        validator.validar(cliente);
+        clienteValidator.validar(cliente);
         if(cliente.getEnderecos() != null && !cliente.getEnderecos().isEmpty()) {
             cliente.getEnderecos()
                     .forEach(e -> e.setCliente(cliente));
         }
-        service.salvarCliente(cliente);
+        clienteService.salvarCliente(cliente);
     }
 }

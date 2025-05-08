@@ -1,5 +1,6 @@
 package io.github.gabrielvelosoo.ecommerceapi.domain.entity.cliente;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -31,6 +32,7 @@ public class Cliente implements Serializable {
     private String telefone;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Endereco> enderecos = new ArrayList<>();
 
     @CreatedDate

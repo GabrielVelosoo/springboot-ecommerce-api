@@ -11,15 +11,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoriaServiceImpl implements CategoriaService {
 
-    private final CategoriaRepository repository;
+    private final CategoriaRepository categoriaRepository;
 
     @Override
     public void salvarCategoria(Categoria categoria) {
-        repository.save(categoria);
+        categoriaRepository.save(categoria);
     }
 
     @Override
     public List<Categoria> obterCategorias() {
-        return repository.findAll();
+        return categoriaRepository.findAll();
     }
 }

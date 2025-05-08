@@ -15,17 +15,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProdutoController {
 
-    private final ProdutoUseCase useCase;
+    private final ProdutoUseCase produtoUseCase;
 
     @PostMapping
     public ResponseEntity<Void> salvarProduto(@RequestBody @Valid ProdutoRequestDTO produtoDTO) {
-        useCase.salvarProduto(produtoDTO);
+        produtoUseCase.salvarProduto(produtoDTO);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
     public ResponseEntity<List<ProdutoResponseDTO>> obterProdutos() {
-        List<ProdutoResponseDTO> produtosDTO = useCase.obterProdutos();
+        List<ProdutoResponseDTO> produtosDTO = produtoUseCase.obterProdutos();
         return ResponseEntity.ok(produtosDTO);
     }
 }

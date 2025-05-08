@@ -15,17 +15,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoriaController {
 
-    private final CategoriaUseCase useCase;
+    private final CategoriaUseCase categoriaUseCase;
 
     @PostMapping
     public ResponseEntity<Void> salvarCategoria(@RequestBody @Valid CategoriaRequestDTO categoriaDTO) {
-        useCase.salvarCategoria(categoriaDTO);
+        categoriaUseCase.salvarCategoria(categoriaDTO);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
     public ResponseEntity<List<CategoriaResponseDTO>> obterCategorias() {
-        List<CategoriaResponseDTO> categoriasDTO = useCase.obterCategorias();
+        List<CategoriaResponseDTO> categoriasDTO = categoriaUseCase.obterCategorias();
         return ResponseEntity.ok(categoriasDTO);
     }
 }

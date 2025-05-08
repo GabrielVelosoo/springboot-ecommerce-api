@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ClienteServiceImpl implements ClienteService {
 
-    private final ClienteRepository repository;
+    private final ClienteRepository clienteRepository;
 
     @Override
     public void salvarCliente(Cliente cliente) {
-        repository.save(cliente);
+        clienteRepository.save(cliente);
     }
 }

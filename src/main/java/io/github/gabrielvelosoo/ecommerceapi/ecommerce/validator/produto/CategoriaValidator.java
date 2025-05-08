@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CategoriaValidator {
 
-    private final CategoriaRepository repository;
+    private final CategoriaRepository categoriaRepository;
 
     public void validar(Categoria categoria) {
         if(categoriaExiste(categoria)) {
@@ -21,7 +21,7 @@ public class CategoriaValidator {
     }
 
     private boolean categoriaExiste(Categoria categoria) {
-        Optional<Categoria> categoriaOptional = repository.findByNome(categoria.getNome());
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByNome(categoria.getNome());
         if(categoria.getId() == null) {
             return categoriaOptional.isPresent();
         }
