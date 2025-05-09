@@ -28,4 +28,10 @@ public class EnderecoController {
         List<EnderecoResponseDTO> enderecosDTO = enderecoUseCase.obterEnderecosClienteId(clienteId);
         return ResponseEntity.ok().body(enderecosDTO);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletarEndereco(@PathVariable(name = "id") Long enderecoId) {
+        enderecoUseCase.deletarEndereco(enderecoId);
+        return ResponseEntity.ok().build();
+    }
 }

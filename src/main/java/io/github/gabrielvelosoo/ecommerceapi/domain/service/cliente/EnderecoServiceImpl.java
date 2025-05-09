@@ -28,4 +28,15 @@ public class EnderecoServiceImpl implements EnderecoService {
         }
         return enderecoRepository.findByClienteId(clienteId);
     }
+
+    @Override
+    public void deletarEndereco(Endereco endereco) {
+        enderecoRepository.delete(endereco);
+    }
+
+    @Override
+    public Endereco obterEnderecoPorId(Long enderecoId) {
+        return enderecoRepository.findById(enderecoId)
+                .orElseThrow( () -> new RegistroNaoEncontradoException("Endereço não encontrado") );
+    }
 }

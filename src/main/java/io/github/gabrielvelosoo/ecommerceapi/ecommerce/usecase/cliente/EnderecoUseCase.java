@@ -9,4 +9,5 @@ public interface EnderecoUseCase {
 
     void salvarEndereco(EnderecoRequestDTO enderecoDTO);
     List<EnderecoResponseDTO> obterEnderecosClienteId(Long clienteId);
+    void deletarEndereco(Long enderecoId);
 }

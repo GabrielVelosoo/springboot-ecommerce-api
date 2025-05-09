@@ -31,4 +31,10 @@ public class EnderecoUseCaseImpl implements EnderecoUseCase {
         List<Endereco> enderecos = enderecoService.obterEnderecosClienteId(clienteId);
         return enderecoMapper.toDTOs(enderecos);
     }
+
+    @Override
+    public void deletarEndereco(Long enderecoId) {
+        Endereco endereco = enderecoService.obterEnderecoPorId(enderecoId);
+        enderecoService.deletarEndereco(endereco);
+    }
 }
