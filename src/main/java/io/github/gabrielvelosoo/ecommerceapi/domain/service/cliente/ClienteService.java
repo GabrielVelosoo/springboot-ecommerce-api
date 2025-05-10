@@ -4,5 +4,5 @@ import io.github.gabrielvelosoo.ecommerceapi.domain.entity.cliente.Cliente;
 
 public interface ClienteService {
 
-    void salvarCliente(Cliente cliente);
+    Cliente salvarCliente(Cliente cliente);
 }

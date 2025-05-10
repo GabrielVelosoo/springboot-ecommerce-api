@@ -2,6 +2,7 @@ package io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.handler;
 
 import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.excecoes.RegistroDuplicadoException;
 import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.excecoes.RegistroNaoEncontradoException;
+import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.excecoes.RegraNegocioException;
 import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.modelos.CampoErro;
 import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.modelos.ErroResponse;
 import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.modelos.ErroValidacaoResponse;
@@ -48,6 +49,19 @@ public class TratadorGlobalException {
     @ExceptionHandler(RegistroNaoEncontradoException.class)
     public ResponseEntity<ErroResponse> handleRegistroNaoEncontradoException(RegistroNaoEncontradoException e) {
         int status = HttpStatus.NOT_FOUND.value();
+        String mensagem = e.getMessage();
+        LocalDateTime timestamp = LocalDateTime.now();
+        ErroResponse erroResponse = new ErroResponse(
+                status,
+                mensagem,
+                timestamp
+        );
+        return ResponseEntity.status(status).body(erroResponse);
+    }
+
+    @ExceptionHandler(RegraNegocioException.class)
+    public ResponseEntity<ErroResponse> handleRegraNegocioException(RegraNegocioException e) {
+        int status = HttpStatus.BAD_REQUEST.value();
         String mensagem = e.getMessage();
         LocalDateTime timestamp = LocalDateTime.now();
         ErroResponse erroResponse = new ErroResponse(

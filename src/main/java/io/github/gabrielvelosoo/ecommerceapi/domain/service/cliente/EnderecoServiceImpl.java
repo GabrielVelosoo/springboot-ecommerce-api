@@ -17,8 +17,14 @@ public class EnderecoServiceImpl implements EnderecoService {
     private final ClienteRepository clienteRepository;
 
     @Override
-    public void salvarEndereco(Endereco endereco) {
-        enderecoRepository.save(endereco);
+    public Endereco salvarEndereco(Endereco endereco) {
+        return enderecoRepository.save(endereco);
+    }
+
+    @Override
+    public Endereco obterEnderecoPorId(Long enderecoId) {
+        return enderecoRepository.findById(enderecoId)
+                .orElseThrow( () -> new RegistroNaoEncontradoException("Endereço não encontrado") );
     }
 
     @Override
@@ -30,13 +36,12 @@ public class EnderecoServiceImpl implements EnderecoService {
     }
 
     @Override
-    public void deletarEndereco(Endereco endereco) {
-        enderecoRepository.delete(endereco);
+    public void editarEndereco(Endereco endereco) {
+        enderecoRepository.save(endereco);
     }
 
     @Override
-    public Endereco obterEnderecoPorId(Long enderecoId) {
-        return enderecoRepository.findById(enderecoId)
-                .orElseThrow( () -> new RegistroNaoEncontradoException("Endereço não encontrado") );
+    public void deletarEndereco(Endereco endereco) {
+        enderecoRepository.delete(endereco);
     }
 }

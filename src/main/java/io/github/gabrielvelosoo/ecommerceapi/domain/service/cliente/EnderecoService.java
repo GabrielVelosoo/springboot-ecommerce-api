@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface EnderecoService {
 
-    void salvarEndereco(Endereco endereco);
-    List<Endereco> obterEnderecosClienteId(Long clienteId);
-    void deletarEndereco(Endereco endereco);
+    Endereco salvarEndereco(Endereco endereco);
     Endereco obterEnderecoPorId(Long enderecoId);
+    List<Endereco> obterEnderecosClienteId(Long clienteId);
+    void editarEndereco(Endereco endereco);
+    void deletarEndereco(Endereco endereco);
 }

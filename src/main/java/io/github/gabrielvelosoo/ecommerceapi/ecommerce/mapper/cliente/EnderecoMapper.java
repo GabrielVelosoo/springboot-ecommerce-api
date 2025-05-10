@@ -19,5 +19,17 @@ public abstract class EnderecoMapper {
     @Mapping(target = "cliente", expression = "java( clienteRepository.findById(enderecoDTO.clienteId()).orElse(null) )")
     public abstract Endereco toEntity(EnderecoRequestDTO enderecoDTO);
 
+    public abstract EnderecoResponseDTO toDTO(Endereco endereco);
     public abstract List<EnderecoResponseDTO> toDTOs(List<Endereco> enderecos);
+
+    public void editarEndereco(Endereco endereco, EnderecoRequestDTO enderecoDTO) {
+        endereco.setNomeContato(enderecoDTO.nomeContato());
+        endereco.setTelefoneContato(enderecoDTO.telefoneContato());
+        endereco.setRua(enderecoDTO.rua());
+        endereco.setNumero(enderecoDTO.numero());
+        endereco.setBairro(enderecoDTO.bairro());
+        endereco.setCidade(enderecoDTO.cidade());
+        endereco.setCep(enderecoDTO.cep());
+        endereco.setComplemento(enderecoDTO.complemento());
+    }
 }

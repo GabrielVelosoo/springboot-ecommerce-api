@@ -3,30 +3,41 @@ package io.github.gabrielvelosoo.ecommerceapi.infrastructure.controller.cliente;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.cliente.EnderecoUseCase;
+import io.github.gabrielvelosoo.ecommerceapi.infrastructure.controller.GenericController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/enderecos")
 @RequiredArgsConstructor
-public class EnderecoController {
+public class EnderecoController implements GenericController {
 
     private final EnderecoUseCase enderecoUseCase;
 
     @PostMapping
-    public ResponseEntity<Void> salvarEndereco(@RequestBody @Valid EnderecoRequestDTO enderecoDTO) {
-        enderecoUseCase.salvarEndereco(enderecoDTO);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<EnderecoResponseDTO> salvarEndereco(@RequestBody @Valid EnderecoRequestDTO enderecoDTO) {
+        EnderecoResponseDTO enderecoDTOResponse = enderecoUseCase.salvarEndereco(enderecoDTO);
+        URI location = gerarHeaderLocation(enderecoDTOResponse.id());
+        return ResponseEntity.created(location).body(enderecoDTOResponse);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<List<EnderecoResponseDTO>> obterEnderecosClienteId(@PathVariable(name = "id") Long clienteId) {
         List<EnderecoResponseDTO> enderecosDTO = enderecoUseCase.obterEnderecosClienteId(clienteId);
         return ResponseEntity.ok().body(enderecosDTO);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> editarEndereco(@PathVariable(name = "id") Long enderecoId,
+                                               @RequestBody @Valid EnderecoRequestDTO enderecoDTO
+    ) {
+        enderecoUseCase.editarEndereco(enderecoId, enderecoDTO);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/{id}")

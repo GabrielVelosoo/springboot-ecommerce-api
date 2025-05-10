@@ -20,16 +20,25 @@ public class EnderecoUseCaseImpl implements EnderecoUseCase {
     private final EnderecoValidator enderecoValidator;
 
     @Override
-    public void salvarEndereco(EnderecoRequestDTO enderecoDTO) {
+    public EnderecoResponseDTO salvarEndereco(EnderecoRequestDTO enderecoDTO) {
         Endereco endereco = enderecoMapper.toEntity(enderecoDTO);
-        enderecoValidator.validar(endereco);
-        enderecoService.salvarEndereco(endereco);
+        enderecoValidator.validar(endereco, enderecoDTO);
+        Endereco enderecoSalvo = enderecoService.salvarEndereco(endereco);
+        return enderecoMapper.toDTO(enderecoSalvo);
     }
 
     @Override
     public List<EnderecoResponseDTO> obterEnderecosClienteId(Long clienteId) {
         List<Endereco> enderecos = enderecoService.obterEnderecosClienteId(clienteId);
         return enderecoMapper.toDTOs(enderecos);
+    }
+
+    @Override
+    public void editarEndereco(Long enderecoId, EnderecoRequestDTO enderecoDTO) {
+        Endereco endereco = enderecoService.obterEnderecoPorId(enderecoId);
+        enderecoValidator.validar(endereco, enderecoDTO);
+        enderecoMapper.editarEndereco(endereco, enderecoDTO);
+        enderecoService.editarEndereco(endereco);
     }
 
     @Override

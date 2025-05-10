@@ -12,7 +12,7 @@ public class ClienteServiceImpl implements ClienteService {
     private final ClienteRepository clienteRepository;
 
     @Override
-    public void salvarCliente(Cliente cliente) {
-        clienteRepository.save(cliente);
+    public Cliente salvarCliente(Cliente cliente) {
+        return clienteRepository.save(cliente);
     }
 }
