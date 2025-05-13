@@ -1,10 +1,10 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.cliente;
 
-import io.github.gabrielvelosoo.ecommerceapi.domain.entity.cliente.Endereco;
-import io.github.gabrielvelosoo.ecommerceapi.domain.repository.cliente.ClienteRepository;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Endereco;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.cliente.ClienteRepository;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoRequestDTO;
-import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.excecoes.RegistroNaoEncontradoException;
-import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.excecoes.RegraNegocioException;
+import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.exception.excecoes.RegistroNaoEncontradoException;
+import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.exception.excecoes.RegraNegocioException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

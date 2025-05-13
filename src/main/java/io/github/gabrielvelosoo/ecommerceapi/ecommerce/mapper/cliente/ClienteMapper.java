@@ -1,6 +1,6 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.cliente;
 
-import io.github.gabrielvelosoo.ecommerceapi.domain.entity.cliente.Cliente;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Cliente;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteResponseDTO;
 import org.mapstruct.Mapper;

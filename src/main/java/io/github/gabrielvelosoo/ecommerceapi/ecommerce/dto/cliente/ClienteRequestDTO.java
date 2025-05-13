@@ -1,6 +1,6 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente;
 
-import io.github.gabrielvelosoo.ecommerceapi.domain.entity.cliente.Endereco;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;

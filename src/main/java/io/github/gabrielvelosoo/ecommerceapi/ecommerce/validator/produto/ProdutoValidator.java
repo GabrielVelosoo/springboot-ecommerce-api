@@ -1,8 +1,8 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.produto;
 
-import io.github.gabrielvelosoo.ecommerceapi.domain.entity.produto.Produto;
-import io.github.gabrielvelosoo.ecommerceapi.domain.repository.produto.CategoriaRepository;
-import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.excecoes.RegistroNaoEncontradoException;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.produto.Produto;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.CategoriaRepository;
+import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.exception.excecoes.RegistroNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

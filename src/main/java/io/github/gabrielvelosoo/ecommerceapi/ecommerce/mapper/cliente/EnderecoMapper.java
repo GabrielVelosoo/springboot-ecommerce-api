@@ -1,7 +1,7 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.cliente;
 
-import io.github.gabrielvelosoo.ecommerceapi.domain.entity.cliente.Endereco;
-import io.github.gabrielvelosoo.ecommerceapi.domain.repository.cliente.ClienteRepository;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Endereco;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.cliente.ClienteRepository;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoResponseDTO;
 import org.mapstruct.Mapper;

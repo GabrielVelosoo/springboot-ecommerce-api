@@ -1,0 +1,25 @@
+package io.github.gabrielvelosoo.ecommerceapi.dominio.service.produto;
+
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.produto.Categoria;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.CategoriaRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class CategoriaServiceImpl implements CategoriaService {
+
+    private final CategoriaRepository categoriaRepository;
+
+    @Override
+    public Categoria salvarCategoria(Categoria categoria) {
+        return categoriaRepository.save(categoria);
+    }
+
+    @Override
+    public List<Categoria> obterCategorias() {
+        return categoriaRepository.findAll();
+    }
+}
