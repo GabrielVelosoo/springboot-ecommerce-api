@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface CategoriaService {
 
-    void salvarCategoria(Categoria categoria);
+    Categoria salvarCategoria(Categoria categoria);
     List<Categoria> obterCategorias();
 }

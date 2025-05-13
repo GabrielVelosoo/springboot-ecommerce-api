@@ -14,8 +14,8 @@ public class CategoriaServiceImpl implements CategoriaService {
     private final CategoriaRepository categoriaRepository;
 
     @Override
-    public void salvarCategoria(Categoria categoria) {
-        categoriaRepository.save(categoria);
+    public Categoria salvarCategoria(Categoria categoria) {
+        return categoriaRepository.save(categoria);
     }
 
     @Override

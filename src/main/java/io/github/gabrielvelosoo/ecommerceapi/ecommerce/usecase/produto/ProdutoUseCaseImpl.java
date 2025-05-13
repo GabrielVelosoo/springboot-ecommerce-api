@@ -20,10 +20,11 @@ public class ProdutoUseCaseImpl implements ProdutoUseCase {
     private final ProdutoValidator produtoValidator;
 
     @Override
-    public void salvarProduto(ProdutoRequestDTO produtoDTO) {
+    public ProdutoResponseDTO salvarProduto(ProdutoRequestDTO produtoDTO) {
         Produto produto = produtoMapper.toEntity(produtoDTO);
         produtoValidator.validar(produto);
-        produtoService.salvaProduto(produto);
+        Produto produtoSalvo = produtoService.salvaProduto(produto);
+        return produtoMapper.toDTO(produtoSalvo);
     }
 
     @Override

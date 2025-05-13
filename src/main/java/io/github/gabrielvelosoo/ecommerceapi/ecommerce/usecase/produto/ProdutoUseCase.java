@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ProdutoUseCase {
 
-    void salvarProduto(ProdutoRequestDTO produtoDTO);
+    ProdutoResponseDTO salvarProduto(ProdutoRequestDTO produtoDTO);
     List<ProdutoResponseDTO> obterProdutos();
 }

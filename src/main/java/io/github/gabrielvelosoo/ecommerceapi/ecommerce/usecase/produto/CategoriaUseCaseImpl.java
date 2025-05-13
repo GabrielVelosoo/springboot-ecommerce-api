@@ -20,10 +20,11 @@ public class CategoriaUseCaseImpl implements CategoriaUseCase {
     private final CategoriaValidator categoriaValidator;
 
     @Override
-    public void salvarCategoria(CategoriaRequestDTO categoriaDTO) {
+    public CategoriaResponseDTO salvarCategoria(CategoriaRequestDTO categoriaDTO) {
         Categoria categoria = categoriaMapper.toEntity(categoriaDTO);
         categoriaValidator.validar(categoria);
-        categoriaService.salvarCategoria(categoria);
+        Categoria categoriaSalva = categoriaService.salvarCategoria(categoria);
+        return categoriaMapper.toDTO(categoriaSalva);
     }
 
     @Override
