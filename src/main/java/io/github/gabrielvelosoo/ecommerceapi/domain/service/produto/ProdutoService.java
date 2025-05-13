@@ -10,4 +10,5 @@ public interface ProdutoService {
     List<Produto> obterProdutos();
     Produto obterProdutoPorId(Long produtoId);
     Produto editarProduto(Produto produto);
+    void deletarProduto(Produto produto);
 }

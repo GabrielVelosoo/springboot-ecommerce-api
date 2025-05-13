@@ -10,4 +10,5 @@ public interface ProdutoUseCase {
     ProdutoResponseDTO salvarProduto(ProdutoRequestDTO produtoDTO);
     List<ProdutoResponseDTO> obterProdutos();
     ProdutoResponseDTO editarProduto(Long produtoId, ProdutoRequestDTO produtoDTO);
+    void deletarProduto(Long produtoId);
 }

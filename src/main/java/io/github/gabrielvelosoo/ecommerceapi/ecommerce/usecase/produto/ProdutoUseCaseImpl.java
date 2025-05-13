@@ -41,4 +41,10 @@ public class ProdutoUseCaseImpl implements ProdutoUseCase {
         Produto produtoEditado = produtoService.editarProduto(produto);
         return produtoMapper.toDTO(produtoEditado);
     }
+
+    @Override
+    public void deletarProduto(Long produtoId) {
+        Produto produto = produtoService.obterProdutoPorId(produtoId);
+        produtoService.deletarProduto(produto);
+    }
 }

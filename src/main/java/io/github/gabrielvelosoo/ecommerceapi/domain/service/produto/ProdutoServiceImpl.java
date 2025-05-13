@@ -34,4 +34,9 @@ public class ProdutoServiceImpl implements ProdutoService {
     public Produto editarProduto(Produto produto) {
         return produtoRepository.save(produto);
     }
+
+    @Override
+    public void deletarProduto(Produto produto) {
+        produtoRepository.delete(produto);
+    }
 }

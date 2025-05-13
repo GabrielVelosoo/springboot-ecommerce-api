@@ -39,4 +39,10 @@ public class ProdutoController implements GenericController {
         ProdutoResponseDTO produtoDTOResponse = produtoUseCase.editarProduto(produtoId, produtoDTO);
         return ResponseEntity.ok().body(produtoDTOResponse);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletarProduto(@PathVariable(name = "id") Long produtoId) {
+        produtoUseCase.deletarProduto(produtoId);
+        return ResponseEntity.noContent().build();
+    }
 }
