@@ -8,7 +8,6 @@ import java.util.List;
 public interface ProdutoService {
 
     Produto salvaProduto(Produto produto);
-    List<Produto> obterProdutos();
     Produto obterProdutoPorId(Long produtoId);
     List<Produto> obterProdutosPorNome(Specification<Produto> spec);
     Produto editarProduto(Produto produto);

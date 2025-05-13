@@ -30,7 +30,7 @@ public class ClienteController implements GenericController {
                                                             @RequestBody @Valid ClienteRequestDTO clienteDTO
     ) {
         ClienteResponseDTO clienteDTOResponse = clienteUseCase.editarCliente(clienteId, clienteDTO);
-        return ResponseEntity.ok().body(clienteDTOResponse);
+        return ResponseEntity.ok(clienteDTOResponse);
     }
 
     @DeleteMapping(value = "/{id}")

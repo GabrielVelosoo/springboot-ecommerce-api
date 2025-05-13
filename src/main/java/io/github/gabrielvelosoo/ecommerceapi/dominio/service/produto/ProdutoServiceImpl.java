@@ -21,11 +21,6 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public List<Produto> obterProdutos() {
-        return produtoRepository.findAll();
-    }
-
-    @Override
     public Produto obterProdutoPorId(Long produtoId) {
         return produtoRepository.findById(produtoId)
                 .orElseThrow( () -> new RegistroNaoEncontradoException("Produto não encontrado") );

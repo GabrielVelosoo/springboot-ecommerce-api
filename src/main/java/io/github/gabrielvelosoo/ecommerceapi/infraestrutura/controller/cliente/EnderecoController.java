@@ -29,7 +29,7 @@ public class EnderecoController implements GenericController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<List<EnderecoResponseDTO>> obterEnderecosClienteId(@PathVariable(name = "id") Long clienteId) {
         List<EnderecoResponseDTO> enderecosDTO = enderecoUseCase.obterEnderecosClienteId(clienteId);
-        return ResponseEntity.ok().body(enderecosDTO);
+        return ResponseEntity.ok(enderecosDTO);
     }
 
     @PutMapping(value = "/{id}")
@@ -37,7 +37,7 @@ public class EnderecoController implements GenericController {
                                                               @RequestBody @Valid EnderecoRequestDTO enderecoDTO
     ) {
         EnderecoResponseDTO enderecoDTOResponse = enderecoUseCase.editarEndereco(enderecoId, enderecoDTO);
-        return ResponseEntity.ok().body(enderecoDTOResponse);
+        return ResponseEntity.ok(enderecoDTOResponse);
     }
 
     @DeleteMapping(value = "/{id}")

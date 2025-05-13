@@ -8,7 +8,6 @@ import java.util.List;
 public interface ProdutoUseCase {
 
     ProdutoResponseDTO salvarProduto(ProdutoRequestDTO produtoDTO);
-    List<ProdutoResponseDTO> obterProdutos();
     List<ProdutoResponseDTO> obterProdutosPorNome(String produtoNome);
     ProdutoResponseDTO editarProduto(Long produtoId, ProdutoRequestDTO produtoDTO);
     void deletarProduto(Long produtoId);

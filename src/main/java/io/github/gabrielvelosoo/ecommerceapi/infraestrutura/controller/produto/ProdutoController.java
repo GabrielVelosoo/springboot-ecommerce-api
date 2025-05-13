@@ -27,15 +27,9 @@ public class ProdutoController implements GenericController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProdutoResponseDTO>> obterProdutos() {
-        List<ProdutoResponseDTO> produtosDTO = produtoUseCase.obterProdutos();
-        return ResponseEntity.ok(produtosDTO);
-    }
-
-    @GetMapping
     public ResponseEntity<List<ProdutoResponseDTO>> obterProdutosPorNome(@RequestParam(value = "nome", required = false) String produtoNome) {
         List<ProdutoResponseDTO> produtosDTO = produtoUseCase.obterProdutosPorNome(produtoNome);
-        return ResponseEntity.ok().body(produtosDTO);
+        return ResponseEntity.ok(produtosDTO);
     }
 
     @PutMapping(value = "/{id}")
@@ -43,7 +37,7 @@ public class ProdutoController implements GenericController {
                                                             @RequestBody @Valid ProdutoRequestDTO produtoDTO
     ) {
         ProdutoResponseDTO produtoDTOResponse = produtoUseCase.editarProduto(produtoId, produtoDTO);
-        return ResponseEntity.ok().body(produtoDTOResponse);
+        return ResponseEntity.ok(produtoDTOResponse);
     }
 
     @DeleteMapping(value = "/{id}")
