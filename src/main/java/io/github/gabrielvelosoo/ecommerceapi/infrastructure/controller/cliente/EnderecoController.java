@@ -34,7 +34,7 @@ public class EnderecoController implements GenericController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<EnderecoResponseDTO> editarEndereco(@PathVariable(name = "id") Long enderecoId,
-                                               @RequestBody @Valid EnderecoRequestDTO enderecoDTO
+                                                              @RequestBody @Valid EnderecoRequestDTO enderecoDTO
     ) {
         EnderecoResponseDTO enderecoDTOResponse = enderecoUseCase.editarEndereco(enderecoId, enderecoDTO);
         return ResponseEntity.ok().body(enderecoDTOResponse);
@@ -43,6 +43,6 @@ public class EnderecoController implements GenericController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletarEndereco(@PathVariable(name = "id") Long enderecoId) {
         enderecoUseCase.deletarEndereco(enderecoId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }

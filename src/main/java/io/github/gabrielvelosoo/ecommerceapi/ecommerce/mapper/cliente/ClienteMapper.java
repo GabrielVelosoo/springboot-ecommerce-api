@@ -6,8 +6,14 @@ import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteRespon
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface ClienteMapper {
+public abstract class ClienteMapper {
 
-    Cliente toEntity(ClienteRequestDTO clienteDTO);
-    ClienteResponseDTO toDTO(Cliente cliente);
+    public abstract Cliente toEntity(ClienteRequestDTO clienteDTO);
+    public abstract ClienteResponseDTO toDTO(Cliente cliente);
+
+    public void editarCliente(Cliente cliente, ClienteRequestDTO clienteDTO) {
+        cliente.setNome(clienteDTO.nome());
+        cliente.setCpf(clienteDTO.cpf());
+        cliente.setTelefone(clienteDTO.telefone());
+    }
 }

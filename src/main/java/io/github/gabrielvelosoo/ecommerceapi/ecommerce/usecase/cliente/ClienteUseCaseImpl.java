@@ -30,4 +30,19 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
         Cliente clienteSalvo = clienteService.salvarCliente(cliente);
         return clienteMapper.toDTO(clienteSalvo);
     }
+
+    @Override
+    public ClienteResponseDTO editarCliente(Long clienteId, ClienteRequestDTO clienteDTO) {
+        Cliente cliente = clienteService.obterClientePorId(clienteId);
+        clienteValidator.validar(cliente);
+        clienteMapper.editarCliente(cliente, clienteDTO);
+        Cliente clienteEditado = clienteService.editarCliente(cliente);
+        return clienteMapper.toDTO(clienteEditado);
+    }
+
+    @Override
+    public void deletarCliente(Long clienteId) {
+        Cliente cliente = clienteService.obterClientePorId(clienteId);
+        clienteService.deletarCliente(cliente);
+    }
 }

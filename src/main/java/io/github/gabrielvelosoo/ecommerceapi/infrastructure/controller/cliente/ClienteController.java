@@ -7,10 +7,7 @@ import io.github.gabrielvelosoo.ecommerceapi.infrastructure.controller.GenericCo
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -26,5 +23,19 @@ public class ClienteController implements GenericController {
         ClienteResponseDTO clienteDTOResponse = clienteUseCase.salvarCliente(clienteDTO);
         URI location = gerarHeaderLocation(clienteDTOResponse.id());
         return ResponseEntity.created(location).body(clienteDTOResponse);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ClienteResponseDTO> editarCliente(@PathVariable(name = "id") Long clienteId,
+                                                            @RequestBody @Valid ClienteRequestDTO clienteDTO
+    ) {
+        ClienteResponseDTO clienteDTOResponse = clienteUseCase.editarCliente(clienteId, clienteDTO);
+        return ResponseEntity.ok().body(clienteDTOResponse);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletarCliente(@PathVariable(name = "id") Long clienteId) {
+        clienteUseCase.deletarCliente(clienteId);
+        return ResponseEntity.noContent().build();
     }
 }
