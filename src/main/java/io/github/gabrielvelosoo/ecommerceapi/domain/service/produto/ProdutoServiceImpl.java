@@ -2,6 +2,7 @@ package io.github.gabrielvelosoo.ecommerceapi.domain.service.produto;
 
 import io.github.gabrielvelosoo.ecommerceapi.domain.entity.produto.Produto;
 import io.github.gabrielvelosoo.ecommerceapi.domain.repository.produto.ProdutoRepository;
+import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.excecoes.RegistroNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +22,16 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public List<Produto> obterProdutos() {
         return produtoRepository.findAll();
+    }
+
+    @Override
+    public Produto obterProdutoPorId(Long produtoId) {
+        return produtoRepository.findById(produtoId)
+                .orElseThrow( () -> new RegistroNaoEncontradoException("Produto não encontrado") );
+    }
+
+    @Override
+    public Produto editarProduto(Produto produto) {
+        return produtoRepository.save(produto);
     }
 }

@@ -32,4 +32,13 @@ public class ProdutoUseCaseImpl implements ProdutoUseCase {
         List<Produto> produtos = produtoService.obterProdutos();
         return produtoMapper.toDTOs(produtos);
     }
+
+    @Override
+    public ProdutoResponseDTO editarProduto(Long produtoId, ProdutoRequestDTO produtoDTO) {
+        Produto produto = produtoService.obterProdutoPorId(produtoId);
+        produtoValidator.validar(produto);
+        produtoMapper.editarProduto(produto, produtoDTO);
+        Produto produtoEditado = produtoService.editarProduto(produto);
+        return produtoMapper.toDTO(produtoEditado);
+    }
 }

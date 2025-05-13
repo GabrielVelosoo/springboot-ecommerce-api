@@ -8,4 +8,6 @@ public interface ProdutoService {
 
     Produto salvaProduto(Produto produto);
     List<Produto> obterProdutos();
+    Produto obterProdutoPorId(Long produtoId);
+    Produto editarProduto(Produto produto);
 }

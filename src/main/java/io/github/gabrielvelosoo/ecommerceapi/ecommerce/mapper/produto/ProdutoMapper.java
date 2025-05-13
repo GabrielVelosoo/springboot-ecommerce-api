@@ -4,6 +4,7 @@ import io.github.gabrielvelosoo.ecommerceapi.domain.entity.produto.Produto;
 import io.github.gabrielvelosoo.ecommerceapi.domain.repository.produto.CategoriaRepository;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.ProdutoRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.ProdutoResponseDTO;
+import io.github.gabrielvelosoo.ecommerceapi.infrastructure.exception.excecoes.RegistroNaoEncontradoException;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +22,13 @@ public abstract class ProdutoMapper {
 
     public abstract ProdutoResponseDTO toDTO(Produto produto);
     public abstract List<ProdutoResponseDTO> toDTOs(List<Produto> produtos);
+
+    public void editarProduto(Produto produto, ProdutoRequestDTO produtoDTO) {
+        produto.setNome(produtoDTO.nome());
+        produto.setDescricao(produtoDTO.descricao());
+        produto.setPreco(produtoDTO.preco());
+        produto.setQuantidadeEstoque(produtoDTO.quantidadeEstoque());
+        produto.setImagemUrl(produtoDTO.imagemUrl());
+        produto.setCategoria(categoriaRepository.findById(produtoDTO.categoriaId()).orElseThrow( () -> new RegistroNaoEncontradoException("Categoria não encontrada") ));
+    }
 }
