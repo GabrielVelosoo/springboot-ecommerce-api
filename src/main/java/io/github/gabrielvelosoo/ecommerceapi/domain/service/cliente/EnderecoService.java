@@ -9,6 +9,6 @@ public interface EnderecoService {
     Endereco salvarEndereco(Endereco endereco);
     Endereco obterEnderecoPorId(Long enderecoId);
     List<Endereco> obterEnderecosClienteId(Long clienteId);
-    void editarEndereco(Endereco endereco);
+    Endereco editarEndereco(Endereco endereco);
     void deletarEndereco(Endereco endereco);
 }

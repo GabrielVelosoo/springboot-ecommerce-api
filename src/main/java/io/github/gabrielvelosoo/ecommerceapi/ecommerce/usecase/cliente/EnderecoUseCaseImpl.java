@@ -34,11 +34,12 @@ public class EnderecoUseCaseImpl implements EnderecoUseCase {
     }
 
     @Override
-    public void editarEndereco(Long enderecoId, EnderecoRequestDTO enderecoDTO) {
+    public EnderecoResponseDTO editarEndereco(Long enderecoId, EnderecoRequestDTO enderecoDTO) {
         Endereco endereco = enderecoService.obterEnderecoPorId(enderecoId);
         enderecoValidator.validar(endereco, enderecoDTO);
         enderecoMapper.editarEndereco(endereco, enderecoDTO);
-        enderecoService.editarEndereco(endereco);
+        Endereco enderecoEditado = enderecoService.editarEndereco(endereco);
+        return enderecoMapper.toDTO(enderecoEditado);
     }
 
     @Override

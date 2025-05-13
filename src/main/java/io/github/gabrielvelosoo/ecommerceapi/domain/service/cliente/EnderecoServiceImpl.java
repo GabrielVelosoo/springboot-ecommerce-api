@@ -36,8 +36,8 @@ public class EnderecoServiceImpl implements EnderecoService {
     }
 
     @Override
-    public void editarEndereco(Endereco endereco) {
-        enderecoRepository.save(endereco);
+    public Endereco editarEndereco(Endereco endereco) {
+        return enderecoRepository.save(endereco);
     }
 
     @Override
