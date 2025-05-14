@@ -21,14 +21,18 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
 
     @Override
     public ClienteResponseDTO salvarCliente(ClienteRequestDTO clienteDTO) {
-        Cliente cliente = clienteMapper.toEntity(clienteDTO);
+        Cliente cliente = clienteMapper.toEntityComCarrinho(clienteDTO);
         clienteValidator.validar(cliente);
 
-        Optional.ofNullable(cliente.getEnderecos())
-                .ifPresent(enderecos -> enderecos.forEach(e -> e.setCliente(cliente)));
+        associarEndereco(cliente);
 
         Cliente clienteSalvo = clienteService.salvarCliente(cliente);
         return clienteMapper.toDTO(clienteSalvo);
+    }
+
+    public void associarEndereco(Cliente cliente) {
+        Optional.ofNullable(cliente.getEnderecos())
+                .ifPresent(enderecos -> enderecos.forEach(endereco -> endereco.setCliente(cliente)));
     }
 
     @Override

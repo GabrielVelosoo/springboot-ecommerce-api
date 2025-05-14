@@ -1,6 +1,7 @@
 package io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.carrinho.Carrinho;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -34,6 +35,10 @@ public class Cliente implements Serializable {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Endereco> enderecos = new ArrayList<>();
+
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Carrinho carrinho;
 
     @CreatedDate
     @Column(name = "data_cadastro")
