@@ -1,6 +1,7 @@
 package io.github.gabrielvelosoo.ecommerceapi.dominio.service.produto;
 
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.produto.Produto;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.CategoriaRepository;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.ProdutoRepository;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.exception.excecoes.RegistroNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 public class ProdutoServiceImpl implements ProdutoService {
 
     private final ProdutoRepository produtoRepository;
+    private final CategoriaRepository categoriaRepository;
 
     @Override
     public Produto salvaProduto(Produto produto) {
@@ -29,6 +31,14 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public List<Produto> obterProdutosPorNome(Specification<Produto> spec) {
         return produtoRepository.findAll(spec);
+    }
+
+    @Override
+    public List<Produto> obterProdutosPorCategoria(Long categoriaId) {
+        if(!categoriaRepository.existsById(categoriaId)) {
+            throw new RegistroNaoEncontradoException("Categoria não encontrada");
+        }
+        return produtoRepository.findByCategoriaId(categoriaId);
     }
 
     @Override

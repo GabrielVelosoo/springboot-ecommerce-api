@@ -9,6 +9,7 @@ public interface ProdutoUseCase {
 
     ProdutoResponseDTO salvarProduto(ProdutoRequestDTO produtoDTO);
     List<ProdutoResponseDTO> obterProdutosPorNome(String produtoNome);
+    List<ProdutoResponseDTO> obterProdutosPorCategoria(Long categoriaId);
     ProdutoResponseDTO editarProduto(Long produtoId, ProdutoRequestDTO produtoDTO);
     void deletarProduto(Long produtoId);
 }

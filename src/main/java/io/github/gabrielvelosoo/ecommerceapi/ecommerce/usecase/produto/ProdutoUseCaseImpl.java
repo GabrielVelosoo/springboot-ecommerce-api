@@ -32,11 +32,14 @@ public class ProdutoUseCaseImpl implements ProdutoUseCase {
 
     @Override
     public List<ProdutoResponseDTO> obterProdutosPorNome(String produtoNome) {
-        Specification<Produto> spec = Specification.where( (root, query, cb) -> cb.conjunction() );
-        if(produtoNome != null && !produtoNome.isEmpty()) {
-            spec = spec.and(nomeLike(produtoNome));
-        }
+        Specification<Produto> spec = Specification.where(filtrarPorNome(produtoNome));
         List<Produto> produtos = produtoService.obterProdutosPorNome(spec);
+        return produtoMapper.toDTOs(produtos);
+    }
+
+    @Override
+    public List<ProdutoResponseDTO> obterProdutosPorCategoria(Long categoriaId) {
+        List<Produto> produtos = produtoService.obterProdutosPorCategoria(categoriaId);
         return produtoMapper.toDTOs(produtos);
     }
 

@@ -5,7 +5,10 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class ProdutoSpecification {
 
-    public static Specification<Produto> nomeLike(String produtoNome) {
+    public static Specification<Produto> filtrarPorNome(String produtoNome) {
+        if (produtoNome == null || produtoNome.trim().isEmpty()) {
+            return null;
+        }
         return (root, query, cb) -> cb.like( cb.upper(root.get("nome")), "%" + produtoNome.toUpperCase() + "%" );
     }
 }

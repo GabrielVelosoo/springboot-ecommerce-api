@@ -10,6 +10,7 @@ public interface ProdutoService {
     Produto salvaProduto(Produto produto);
     Produto obterProdutoPorId(Long produtoId);
     List<Produto> obterProdutosPorNome(Specification<Produto> spec);
+    List<Produto> obterProdutosPorCategoria(Long categoriaId);
     Produto editarProduto(Produto produto);
     void deletarProduto(Produto produto);
 }

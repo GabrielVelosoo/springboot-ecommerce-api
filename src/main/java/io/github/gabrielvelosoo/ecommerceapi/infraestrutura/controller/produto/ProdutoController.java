@@ -32,6 +32,12 @@ public class ProdutoController implements GenericController {
         return ResponseEntity.ok(produtosDTO);
     }
 
+    @GetMapping(value = "/categorias/{id}")
+    public ResponseEntity<List<ProdutoResponseDTO>> obterProdutosPorCategoria(@PathVariable(name = "id") Long categoriaId) {
+        List<ProdutoResponseDTO> protudosDTO = produtoUseCase.obterProdutosPorCategoria(categoriaId);
+        return ResponseEntity.ok(protudosDTO);
+    }
+
     @PutMapping(value = "/{id}")
     public ResponseEntity<ProdutoResponseDTO> editarProduto(@PathVariable(name = "id") Long produtoId,
                                                             @RequestBody @Valid ProdutoRequestDTO produtoDTO
