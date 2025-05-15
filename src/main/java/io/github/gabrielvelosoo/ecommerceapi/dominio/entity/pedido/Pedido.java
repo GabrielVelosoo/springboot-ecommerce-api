@@ -32,7 +32,7 @@ public class Pedido implements Serializable {
     private List<ItemPedido> itens = new ArrayList<>();
 
     @Column(nullable = false, precision = 18, scale = 2)
-    private BigDecimal total;
+    private BigDecimal totalPedido = BigDecimal.ZERO;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

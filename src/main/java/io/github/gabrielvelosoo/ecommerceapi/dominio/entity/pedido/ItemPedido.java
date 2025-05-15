@@ -33,7 +33,7 @@ public class ItemPedido implements Serializable {
     private Integer quantidade;
 
     @Column(name = "preco_unitario", precision = 18, scale = 2, nullable = false)
-    private BigDecimal precoUnitario;
+    private BigDecimal precoUnitario = BigDecimal.ZERO;
 
     @CreatedDate
     @Column(name = "data_cadastro")

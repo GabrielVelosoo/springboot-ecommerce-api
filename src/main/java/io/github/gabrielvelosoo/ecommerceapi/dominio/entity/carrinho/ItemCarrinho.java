@@ -3,6 +3,7 @@ package io.github.gabrielvelosoo.ecommerceapi.dominio.entity.carrinho;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.produto.Produto;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @Table(name = "tb_item_carrinho")
 @Data
 @EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor
 public class ItemCarrinho implements Serializable {
 
     @Id
@@ -42,4 +44,11 @@ public class ItemCarrinho implements Serializable {
     @LastModifiedDate
     @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
+
+    public ItemCarrinho(Produto produto, Carrinho carrinho, Integer quantidade, BigDecimal precoUnitario) {
+        this.produto = produto;
+        this.carrinho = carrinho;
+        this.quantidade = quantidade;
+        this.precoUnitario = precoUnitario;
+    }
 }

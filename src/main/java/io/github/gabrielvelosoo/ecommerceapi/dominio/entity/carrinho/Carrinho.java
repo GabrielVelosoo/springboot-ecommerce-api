@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,9 @@ public class Carrinho implements Serializable {
 
     @Column(nullable = false)
     private Boolean finalizado = false;
+
+    @Transient
+    private BigDecimal totalCarrinho = BigDecimal.ZERO;
 
     @CreatedDate
     @Column(name = "data_cadastro")
