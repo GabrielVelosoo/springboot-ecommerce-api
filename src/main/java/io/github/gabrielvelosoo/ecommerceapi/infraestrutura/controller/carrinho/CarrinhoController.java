@@ -27,10 +27,34 @@ public class CarrinhoController implements GenericController {
     @PostMapping(value = "/{carrinhoId}/produtos")
     public ResponseEntity<Void> adicionarProdutoAoCarrinho(@PathVariable(name = "carrinhoId") Long carrinhoId,
                                                            @RequestBody ItemCarrinhoRequestDTO itemCarrinhoDTO
-                                                           ) {
+    ) {
         carrinhoUseCase.adicionarProdutoAoCarrinho(carrinhoId, itemCarrinhoDTO.produtoId(), itemCarrinhoDTO.quantidade());
         URI location = gerarHeaderLocation(carrinhoId);
         return ResponseEntity.created(location).build();
+    }
+
+    @PutMapping(value = "/{carrinhoId}/produtos/{produtoId}/diminuir")
+    public ResponseEntity<Void> diminuirQuantidadeProdutoDoCarrinho(@PathVariable(name = "carrinhoId") Long carrinhoId,
+                                                                    @PathVariable(name = "produtoId") Long produtoId
+    ) {
+        carrinhoUseCase.diminuirQuantidadeProdutoDoCarrinho(carrinhoId, produtoId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping(value = "/{carrinhoId}/produtos/{produtoId}/adicionar")
+    public ResponseEntity<Void> adicionarQuantidadeProdutoDoCarrinho(@PathVariable(name = "carrinhoId") Long carrinhoId,
+                                                                    @PathVariable(name = "produtoId") Long produtoId
+    ) {
+        carrinhoUseCase.adicionarQuantidadeProdutoDoCarrinho(carrinhoId, produtoId);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping(value = "/{carrinhoId}/produtos/{produtoId}")
+    public ResponseEntity<Void> removerProdutoDoCarrinho(@PathVariable(name = "carrinhoId") Long carrinhoId,
+                                                         @PathVariable(name = "produtoId") Long produtoId
+    ) {
+        carrinhoUseCase.removerProdutoDoCarrinho(carrinhoId, produtoId);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping(value = "/{carrinhoId}/total")

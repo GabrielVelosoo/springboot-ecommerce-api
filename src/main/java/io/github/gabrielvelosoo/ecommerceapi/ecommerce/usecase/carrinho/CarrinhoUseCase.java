@@ -8,5 +8,8 @@ public interface CarrinhoUseCase {
 
     CarrinhoResponseDTO obterCarrinhoPorId(Long carrinhoId);
     void adicionarProdutoAoCarrinho(Long carrinhoId, Long produtoId, Integer quantidade);
+    void diminuirQuantidadeProdutoDoCarrinho(Long carrinhoId, Long produtoId);
+    void adicionarQuantidadeProdutoDoCarrinho(Long carrinhoId, Long produtoId);
+    void removerProdutoDoCarrinho(Long carrinhoId, Long produtoId);
     BigDecimal obterValorCarrinho(Long carrinhoId);
 }

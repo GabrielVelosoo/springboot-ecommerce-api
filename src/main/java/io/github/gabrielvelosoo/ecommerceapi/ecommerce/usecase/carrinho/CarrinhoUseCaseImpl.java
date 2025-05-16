@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class CarrinhoUseCaseImpl implements CarrinhoUseCase {
     @Override
     public CarrinhoResponseDTO obterCarrinhoPorId(Long carrinhoId) {
         Carrinho carrinho = carrinhoService.obterCarrinhoPorId(carrinhoId);
+        carrinho.setTotalCarrinho(obterValorCarrinho(carrinhoId));
         return carrinhoMapper.toDTO(carrinho);
     }
 
@@ -31,9 +33,54 @@ public class CarrinhoUseCaseImpl implements CarrinhoUseCase {
         Carrinho carrinho = carrinhoService.obterCarrinhoPorId(carrinhoId);
         Produto produto = produtoService.obterProdutoPorId(produtoId);
 
-        ItemCarrinho item = new ItemCarrinho(produto, carrinho, quantidade, produto.getPreco());
-        carrinho.getItens().add(item);
+        Optional<ItemCarrinho> itemExistente = buscarItemPorProduto(carrinho, produtoId);
 
+        if(itemExistente.isPresent()) {
+            ItemCarrinho item = itemExistente.get();
+            item.setQuantidade(item.getQuantidade() + quantidade);
+        } else {
+            ItemCarrinho novoItem = new ItemCarrinho(produto, carrinho, quantidade, produto.getPreco());
+            carrinho.getItens().add(novoItem);
+        }
+
+        carrinhoService.salvarCarrinho(carrinho);
+    }
+
+    @Override
+    public void diminuirQuantidadeProdutoDoCarrinho(Long carrinhoId, Long produtoId) {
+        Carrinho carrinho = carrinhoService.obterCarrinhoPorId(carrinhoId);
+
+        buscarItemPorProduto(carrinho, produtoId).ifPresent(item -> {
+            if(item.getQuantidade() > 1) {
+                item.setQuantidade(item.getQuantidade() - 1);
+            } else {
+                removerProdutoDoCarrinho(carrinhoId, produtoId);
+            }
+            carrinhoService.salvarCarrinho(carrinho);
+        });
+    }
+
+    @Override
+    public void adicionarQuantidadeProdutoDoCarrinho(Long carrinhoId, Long produtoId) {
+        Carrinho carrinho = carrinhoService.obterCarrinhoPorId(carrinhoId);
+        buscarItemPorProduto(carrinho, produtoId).ifPresent(item -> {
+            item.setQuantidade(item.getQuantidade() + 1);
+            carrinhoService.salvarCarrinho(carrinho);
+        });
+    }
+
+    public Optional<ItemCarrinho> buscarItemPorProduto(Carrinho carrinho, Long produtoId) {
+        return carrinho.getItens()
+                .stream()
+                .filter(item -> item.getProduto().getId().equals(produtoId))
+                .findFirst();
+    }
+
+    @Override
+    public void removerProdutoDoCarrinho(Long carrinhoId, Long produtoId) {
+        Carrinho carrinho = carrinhoService.obterCarrinhoPorId(carrinhoId);
+        Produto produto = produtoService.obterProdutoPorId(produtoId);
+        carrinho.getItens().removeIf(item -> item.getProduto().equals(produto));
         carrinhoService.salvarCarrinho(carrinho);
     }
 

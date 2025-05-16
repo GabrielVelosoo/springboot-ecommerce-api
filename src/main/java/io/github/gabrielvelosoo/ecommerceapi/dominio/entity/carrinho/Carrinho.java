@@ -27,7 +27,7 @@ public class Carrinho implements Serializable {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "carrinho", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "carrinho", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemCarrinho> itens = new ArrayList<>();
 
     @Column(nullable = false)
