@@ -36,9 +36,13 @@ public class Pedido implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    private FormaPagamento formaPagamento;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private StatusPedido status;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_entrega_id")
     private Endereco enderecoEntrega;
 

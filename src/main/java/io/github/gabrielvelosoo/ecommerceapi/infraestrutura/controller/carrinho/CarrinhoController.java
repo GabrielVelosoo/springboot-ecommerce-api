@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.net.URI;
 
 @RestController
@@ -55,11 +54,5 @@ public class CarrinhoController implements GenericController {
     ) {
         carrinhoUseCase.removerProdutoDoCarrinho(carrinhoId, produtoId);
         return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping(value = "/{carrinhoId}/total")
-    public ResponseEntity<BigDecimal> obterValorCarrinho(@PathVariable(name = "carrinhoId") Long carrinhoId) {
-        BigDecimal totalCarrinho = carrinhoUseCase.obterValorCarrinho(carrinhoId);
-        return ResponseEntity.ok(totalCarrinho);
     }
 }

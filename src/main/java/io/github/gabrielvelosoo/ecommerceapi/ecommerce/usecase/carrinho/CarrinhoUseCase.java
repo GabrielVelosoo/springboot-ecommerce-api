@@ -11,5 +11,4 @@ public interface CarrinhoUseCase {
     void diminuirQuantidadeProdutoDoCarrinho(Long carrinhoId, Long produtoId);
     void adicionarQuantidadeProdutoDoCarrinho(Long carrinhoId, Long produtoId);
     void removerProdutoDoCarrinho(Long carrinhoId, Long produtoId);
-    BigDecimal obterValorCarrinho(Long carrinhoId);
 }

@@ -10,7 +10,6 @@ import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.carrinho.CarrinhoM
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 @Component
@@ -24,7 +23,7 @@ public class CarrinhoUseCaseImpl implements CarrinhoUseCase {
     @Override
     public CarrinhoResponseDTO obterCarrinhoPorId(Long carrinhoId) {
         Carrinho carrinho = carrinhoService.obterCarrinhoPorId(carrinhoId);
-        carrinho.setTotalCarrinho(obterValorCarrinho(carrinhoId));
+        carrinho.setTotalCarrinho(carrinhoService.obterValorCarrinho(carrinhoId));
         return carrinhoMapper.toDTO(carrinho);
     }
 
@@ -82,24 +81,5 @@ public class CarrinhoUseCaseImpl implements CarrinhoUseCase {
         Produto produto = produtoService.obterProdutoPorId(produtoId);
         carrinho.getItens().removeIf(item -> item.getProduto().equals(produto));
         carrinhoService.salvarCarrinho(carrinho);
-    }
-
-    @Override
-    public BigDecimal obterValorCarrinho(Long carrinhoId) {
-        Carrinho carrinho = carrinhoService.obterCarrinhoPorId(carrinhoId);
-        BigDecimal totalCarrinho = calcularValorCarrinho(carrinho);
-        carrinho.setTotalCarrinho(totalCarrinho);
-        return totalCarrinho;
-    }
-
-    public BigDecimal calcularValorCarrinho(Carrinho carrinho) {
-        BigDecimal totalCarrinho = BigDecimal.ZERO;
-        for(ItemCarrinho item : carrinho.getItens()) {
-            BigDecimal precoUnitario = item.getPrecoUnitario();
-            Integer quantidade = item.getQuantidade();
-            BigDecimal totalItem = precoUnitario.multiply(BigDecimal.valueOf(quantidade));
-            totalCarrinho = totalCarrinho.add(totalItem);
-        }
-        return totalCarrinho;
     }
 }
