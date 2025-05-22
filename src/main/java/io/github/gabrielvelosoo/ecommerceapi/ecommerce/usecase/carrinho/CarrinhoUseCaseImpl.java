@@ -6,6 +6,7 @@ import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.produto.Produto;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.carrinho.CarrinhoService;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.produto.ProdutoService;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.carrinho.CarrinhoResponseDTO;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.carrinho.ItemCarrinhoRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.carrinho.CarrinhoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -23,22 +24,22 @@ public class CarrinhoUseCaseImpl implements CarrinhoUseCase {
     @Override
     public CarrinhoResponseDTO obterCarrinhoPorId(Long carrinhoId) {
         Carrinho carrinho = carrinhoService.obterCarrinhoPorId(carrinhoId);
-        carrinho.setTotalCarrinho(carrinhoService.obterValorCarrinho(carrinhoId));
+        carrinho.setTotalCarrinho(carrinhoService.calcularValorCarrinho(carrinho));
         return carrinhoMapper.toDTO(carrinho);
     }
 
     @Override
-    public void adicionarProdutoAoCarrinho(Long carrinhoId, Long produtoId, Integer quantidade) {
+    public void adicionarProdutoAoCarrinho(Long carrinhoId, ItemCarrinhoRequestDTO itemCarrinhoDTO) {
         Carrinho carrinho = carrinhoService.obterCarrinhoPorId(carrinhoId);
-        Produto produto = produtoService.obterProdutoPorId(produtoId);
+        Produto produto = produtoService.obterProdutoPorId(itemCarrinhoDTO.produtoId());
 
-        Optional<ItemCarrinho> itemExistente = buscarItemPorProduto(carrinho, produtoId);
+        Optional<ItemCarrinho> itemExistente = buscarItemPorProduto(carrinho, produto.getId());
 
         if(itemExistente.isPresent()) {
             ItemCarrinho item = itemExistente.get();
-            item.setQuantidade(item.getQuantidade() + quantidade);
+            item.setQuantidade(item.getQuantidade() + itemCarrinhoDTO.quantidade());
         } else {
-            ItemCarrinho novoItem = new ItemCarrinho(produto, carrinho, quantidade, produto.getPreco());
+            ItemCarrinho novoItem = new ItemCarrinho(produto, carrinho, itemCarrinhoDTO.quantidade(), produto.getPreco());
             carrinho.getItens().add(novoItem);
         }
 
@@ -68,7 +69,7 @@ public class CarrinhoUseCaseImpl implements CarrinhoUseCase {
         });
     }
 
-    public Optional<ItemCarrinho> buscarItemPorProduto(Carrinho carrinho, Long produtoId) {
+    private Optional<ItemCarrinho> buscarItemPorProduto(Carrinho carrinho, Long produtoId) {
         return carrinho.getItens()
                 .stream()
                 .filter(item -> item.getProduto().getId().equals(produtoId))

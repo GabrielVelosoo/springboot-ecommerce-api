@@ -7,9 +7,9 @@ import java.util.List;
 
 public record CarrinhoResponseDTO(
         Long id,
-        ClienteResponseDTO cliente,
-        List<ItemCarrinhoResponseDTO> itens,
         Boolean finalizado,
-        BigDecimal totalCarrinho
+        BigDecimal totalCarrinho,
+        ClienteResponseDTO cliente,
+        List<ItemCarrinhoResponseDTO> itens
     ) {
 }

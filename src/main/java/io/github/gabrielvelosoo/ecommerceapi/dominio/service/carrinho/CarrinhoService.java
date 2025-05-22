@@ -8,6 +8,5 @@ public interface CarrinhoService {
 
     void salvarCarrinho(Carrinho carrinho);
     Carrinho obterCarrinhoPorId(Long carrinhoId);
-    BigDecimal obterValorCarrinho(Long carrinhoId);
     BigDecimal calcularValorCarrinho(Carrinho carrinho);
 }

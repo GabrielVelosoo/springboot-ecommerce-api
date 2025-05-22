@@ -8,10 +8,7 @@ import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.controller.GenericCo
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -34,5 +31,11 @@ public class PedidoController implements GenericController {
         PedidoResponseDTO pedidoResponseDTO = pedidoUseCase.criarPedidoComCarrinho(pedidoCarrinhoDTO);
         URI location = gerarHeaderLocation(pedidoResponseDTO.id());
         return ResponseEntity.created(location).body(pedidoResponseDTO);
+    }
+
+    @GetMapping(value = "/{pedidoId}")
+    public ResponseEntity<PedidoResponseDTO> obterPedidoPorId(@PathVariable(name = "pedidoId") Long idPedido) {
+        PedidoResponseDTO pedidoDTO = pedidoUseCase.obterPedidoPorId(idPedido);
+        return ResponseEntity.ok(pedidoDTO);
     }
 }

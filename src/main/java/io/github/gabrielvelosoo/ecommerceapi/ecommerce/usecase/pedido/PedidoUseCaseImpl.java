@@ -22,6 +22,7 @@ public class PedidoUseCaseImpl implements PedidoUseCase {
     @Override
     public PedidoResponseDTO criarPedido(PedidoRequestDTO pedidoDTO) {
         Pedido pedido = pedidoMapper.toEntity(pedidoDTO);
+        pedido.setTotalPedido(pedidoService.calcularValorPedido(pedido));
         Pedido pedidoSalvo = pedidoService.criarPedido(pedido);
         return pedidoMapper.toDTO(pedidoSalvo);
     }
@@ -29,8 +30,16 @@ public class PedidoUseCaseImpl implements PedidoUseCase {
     @Override
     public PedidoResponseDTO criarPedidoComCarrinho(PedidoCarrinhoRequestDTO pedidoCarrinhoDTO) {
         Carrinho carrinho = carrinhoService.obterCarrinhoPorId(pedidoCarrinhoDTO.carrinhoId());
-        Pedido pedido = pedidoMapper.toPedidoFromCarrinho(carrinho, pedidoCarrinhoDTO.formaPagamento(), pedidoCarrinhoDTO.enderecoEntrega());
+        Pedido pedido = pedidoMapper.toEntityFromCarrinho(carrinho, pedidoCarrinhoDTO.formaPagamento(), pedidoCarrinhoDTO.enderecoEntrega());
+        pedido.setTotalPedido(pedidoService.calcularValorPedido(pedido));
         pedidoService.criarPedido(pedido);
+        return pedidoMapper.toDTO(pedido);
+    }
+
+    @Override
+    public PedidoResponseDTO obterPedidoPorId(Long pedidoId) {
+        Pedido pedido = pedidoService.obterPedidoPorId(pedidoId);
+        pedido.setTotalPedido(pedidoService.calcularValorPedido(pedido));
         return pedidoMapper.toDTO(pedido);
     }
 }

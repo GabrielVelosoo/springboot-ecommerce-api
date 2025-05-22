@@ -10,7 +10,6 @@ public record EnderecoResponseDTO(
         String cidade,
         String estado,
         String cep,
-        String complemento,
-        ClienteResponseDTO cliente
+        String complemento
     ) {
 }

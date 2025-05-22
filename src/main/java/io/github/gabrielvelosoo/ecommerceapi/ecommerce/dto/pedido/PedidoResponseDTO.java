@@ -10,12 +10,12 @@ import java.util.List;
 
 public record PedidoResponseDTO(
         Long id,
-        ClienteResponseDTO cliente,
-        List<ItemPedidoResponseDTO> itens,
+        BigDecimal frete,
         BigDecimal totalPedido,
         FormaPagamento formaPagamento,
         StatusPedido status,
-        EnderecoResponseDTO enderecoEntrega,
-        BigDecimal frete
+        ClienteResponseDTO cliente,
+        List<ItemPedidoResponseDTO> itens,
+        EnderecoResponseDTO enderecoEntrega
     ) {
 }

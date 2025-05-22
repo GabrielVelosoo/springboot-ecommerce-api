@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 
 public record ItemCarrinhoResponseDTO(
         Long id,
-        ProdutoResponseDTO produto,
         Integer quantidade,
-        BigDecimal precoUnitario
+        BigDecimal precoUnitario,
+        ProdutoResponseDTO produto
     ) {
 }

@@ -27,14 +27,6 @@ public class CarrinhoServiceImpl implements CarrinhoService {
     }
 
     @Override
-    public BigDecimal obterValorCarrinho(Long carrinhoId) {
-        Carrinho carrinho = obterCarrinhoPorId(carrinhoId);
-        BigDecimal totalCarrinho = calcularValorCarrinho(carrinho);
-        carrinho.setTotalCarrinho(totalCarrinho);
-        return totalCarrinho;
-    }
-
-    @Override
     public BigDecimal calcularValorCarrinho(Carrinho carrinho) {
         BigDecimal totalCarrinho = BigDecimal.ZERO;
         for(ItemCarrinho item : carrinho.getItens()) {

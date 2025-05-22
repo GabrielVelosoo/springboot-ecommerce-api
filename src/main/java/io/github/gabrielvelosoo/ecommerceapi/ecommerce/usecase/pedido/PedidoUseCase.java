@@ -8,4 +8,5 @@ public interface PedidoUseCase {
 
     PedidoResponseDTO criarPedido(PedidoRequestDTO pedidoDTO);
     PedidoResponseDTO criarPedidoComCarrinho(PedidoCarrinhoRequestDTO pedidoCarrinhoDTO);
+    PedidoResponseDTO obterPedidoPorId(Long pedidoId);
 }

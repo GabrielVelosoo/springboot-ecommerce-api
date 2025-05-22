@@ -3,17 +3,14 @@ package io.github.gabrielvelosoo.ecommerceapi.infraestrutura.controller.carrinho
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.carrinho.CarrinhoResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.carrinho.ItemCarrinhoRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.carrinho.CarrinhoUseCase;
-import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.controller.GenericController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-
 @RestController
 @RequestMapping(value = "/api/carrinhos")
 @RequiredArgsConstructor
-public class CarrinhoController implements GenericController {
+public class CarrinhoController {
 
     private final CarrinhoUseCase carrinhoUseCase;
 
@@ -27,9 +24,8 @@ public class CarrinhoController implements GenericController {
     public ResponseEntity<Void> adicionarProdutoAoCarrinho(@PathVariable(name = "carrinhoId") Long carrinhoId,
                                                            @RequestBody ItemCarrinhoRequestDTO itemCarrinhoDTO
     ) {
-        carrinhoUseCase.adicionarProdutoAoCarrinho(carrinhoId, itemCarrinhoDTO.produtoId(), itemCarrinhoDTO.quantidade());
-        URI location = gerarHeaderLocation(carrinhoId);
-        return ResponseEntity.created(location).build();
+        carrinhoUseCase.adicionarProdutoAoCarrinho(carrinhoId, itemCarrinhoDTO);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping(value = "/{carrinhoId}/produtos/{produtoId}/diminuir")
