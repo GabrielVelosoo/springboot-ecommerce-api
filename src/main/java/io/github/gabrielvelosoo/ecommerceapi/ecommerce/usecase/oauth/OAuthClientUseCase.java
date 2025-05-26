@@ -1,8 +1,8 @@
-package io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.service;
+package io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.oauth;
 
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.entity.OAuthClient;
 
-public interface OAuthClientService {
+public interface OAuthClientUseCase {
 
     OAuthClient salvarClient(OAuthClient oauthClient);
     OAuthClient obterPorClientId(String clientId);

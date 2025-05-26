@@ -1,5 +1,6 @@
 package io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.service;
 
+import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.exception.excecoes.RegistroNaoEncontradoException;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.entity.OAuthClient;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.repository.OAuthClientRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,12 @@ public class OAuthClientServiceImpl implements OAuthClientService {
 
     @Override
     public OAuthClient salvarClient(OAuthClient oauthClient) {
-        return null;
+        return oAuthClientRepository.save(oauthClient);
+    }
+
+    @Override
+    public OAuthClient obterPorClientId(String clientId) {
+        return oAuthClientRepository.findByClientId(clientId)
+                .orElseThrow( () -> new RegistroNaoEncontradoException("Client não encontrado"));
     }
 }

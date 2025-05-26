@@ -13,4 +13,12 @@ public interface GenericController {
                 .buildAndExpand(id)
                 .toUri();
     }
+
+    default URI gerarHeaderLocation(String id) {
+        return ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(id)
+                .toUri();
+    }
 }
