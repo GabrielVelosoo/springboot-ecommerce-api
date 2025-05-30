@@ -36,21 +36,19 @@ public class AuthorizationServerConfiguration {
     @Order(1)
     public SecurityFilterChain authServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
-
-        http
-            .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
-            .with(authorizationServerConfigurer, authorizationServer ->
-                    authorizationServer.oidc(Customizer.withDefaults())
-            )
-            .authorizeHttpRequests(authorizeRequests ->
-                    authorizeRequests.anyRequest().authenticated()
-            )
-            .oauth2ResourceServer(resourceServer ->
-                    resourceServer.jwt(Customizer.withDefaults())
-            )
-            .formLogin(Customizer.withDefaults());
-
-        return http.build();
+        return http
+                .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
+                .with(authorizationServerConfigurer, authorizationServer ->
+                        authorizationServer.oidc(Customizer.withDefaults())
+                )
+                .authorizeHttpRequests(authorizeRequests ->
+                        authorizeRequests.anyRequest().authenticated()
+                )
+                .oauth2ResourceServer(resourceServer ->
+                        resourceServer.jwt(Customizer.withDefaults())
+                )
+                .formLogin(Customizer.withDefaults())
+                .build();
     }
 
     @Bean
@@ -64,6 +62,7 @@ public class AuthorizationServerConfiguration {
                 .builder()
                 .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
                 .accessTokenTimeToLive(Duration.ofMinutes(60))
+                .refreshTokenTimeToLive(Duration.ofMinutes(90))
                 .build();
     }
 
