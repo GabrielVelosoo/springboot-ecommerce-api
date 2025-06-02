@@ -2,35 +2,35 @@ package io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.carrinho.Carrinho;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario.Usuario;
 import jakarta.persistence.*;
-import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "tb_cliente")
-@Data
-@EntityListeners(AuditingEntityListener.class)
-public class Cliente implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Getter
+@Setter
+public class Cliente extends Usuario {
 
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @Column(nullable = false, unique = true, length = 11)
+    @Column(nullable = false, length = 100)
+    private String sobrenome;
+
+    @Column(unique = true, length = 11)
     private String cpf;
 
-    @Column(nullable = false, length = 15)
+    @Column(length = 15)
     private String telefone;
+
+    @Column(name = "dt_nascimento", nullable = false)
+    private LocalDateTime dataNascimento;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -40,11 +40,5 @@ public class Cliente implements Serializable {
     @JsonIgnore
     private Carrinho carrinho;
 
-    @CreatedDate
-    @Column(name = "data_cadastro")
-    private LocalDateTime dataCadastro;
-
-    @LastModifiedDate
-    @Column(name = "data_atualizacao")
-    private LocalDateTime dataAtualizacao;
+    public Cliente() {}
 }

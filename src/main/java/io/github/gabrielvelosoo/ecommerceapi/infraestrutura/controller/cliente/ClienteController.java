@@ -25,6 +25,12 @@ public class ClienteController implements GenericController {
         return ResponseEntity.created(location).body(clienteDTOResponse);
     }
 
+    @GetMapping(value = "/{clienteId}")
+    public ResponseEntity<ClienteResponseDTO> obterClientePorId(@PathVariable(name = "clienteId") Long clienteId) {
+        ClienteResponseDTO clienteDTOResponse = clienteUseCase.obterClientePorId(clienteId);
+        return ResponseEntity.ok(clienteDTOResponse);
+    }
+
     @PutMapping(value = "/{id}")
     public ResponseEntity<ClienteResponseDTO> editarCliente(@PathVariable(name = "id") Long clienteId,
                                                             @RequestBody @Valid ClienteRequestDTO clienteDTO

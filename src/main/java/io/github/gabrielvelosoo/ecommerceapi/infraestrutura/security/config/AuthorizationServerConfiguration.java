@@ -47,7 +47,6 @@ public class AuthorizationServerConfiguration {
                 .oauth2ResourceServer(resourceServer ->
                         resourceServer.jwt(Customizer.withDefaults())
                 )
-                .formLogin(Customizer.withDefaults())
                 .build();
     }
 

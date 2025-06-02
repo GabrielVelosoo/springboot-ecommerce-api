@@ -15,13 +15,13 @@ public class ClienteValidator {
     private final ClienteRepository clienteRepository;
 
     public void validar(Cliente cliente) {
-        if(clientePossuiCpfCadastrado(cliente)) {
-           throw new RegistroDuplicadoException("Este CPF já está cadastrado");
+        if(clientePossuiEmailCadastrado(cliente)) {
+           throw new RegistroDuplicadoException("O e-mail " + cliente.getEmail() + " já está cadastrado");
         }
     }
 
-    public boolean clientePossuiCpfCadastrado(Cliente cliente) {
-        Optional<Cliente> clienteOptional = clienteRepository.findByCpf(cliente.getCpf());
+    public boolean clientePossuiEmailCadastrado(Cliente cliente) {
+        Optional<Cliente> clienteOptional = clienteRepository.findByEmail(cliente.getEmail());
         if(cliente.getId() == null) {
             return clienteOptional.isPresent();
         }

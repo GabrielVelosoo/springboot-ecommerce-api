@@ -1,5 +1,6 @@
 package io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,30 +10,29 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "tb_usuario")
-@Inheritance(strategy = InheritanceType.JOINED)
-@EntityListeners(AuditingEntityListener.class)
+@Table(name = "tb_usuario_role")
 @Getter
 @Setter
-public class Usuario implements Serializable {
+@EntityListeners(AuditingEntityListener.class)
+public class UsuarioRole implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private UsuarioRoleId id = new UsuarioRoleId();
 
-    @Column(unique = true, length = 150, nullable = false)
-    private String email;
+    @ManyToOne
+    @MapsId("usuarioId")
+    @JoinColumn(name = "usuario_id")
+    @JsonIgnore
+    private Usuario usuario;
 
-    @Column(length = 300, nullable = false)
-    private String senha;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UsuarioRole> usuarioRoles = new HashSet<>();
+    @ManyToOne
+    @MapsId("roleId")
+    @JoinColumn(name = "role_id")
+    @JsonIgnore
+    private Role role;
 
     @CreatedDate
     @Column(name = "data_cadastro")
@@ -42,13 +42,18 @@ public class Usuario implements Serializable {
     @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
 
-    public Usuario() {}
+    public UsuarioRole() {}
+
+    public UsuarioRole(Usuario usuario, Role role) {
+        this.usuario = usuario;
+        this.role = role;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Usuario usuario = (Usuario) o;
-        return Objects.equals(id, usuario.id);
+        UsuarioRole that = (UsuarioRole) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override

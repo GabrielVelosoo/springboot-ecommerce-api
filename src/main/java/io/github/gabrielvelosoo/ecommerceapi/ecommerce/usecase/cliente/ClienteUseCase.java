@@ -6,6 +6,7 @@ import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteRespon
 public interface ClienteUseCase {
 
     ClienteResponseDTO salvarCliente(ClienteRequestDTO clienteDTO);
+    ClienteResponseDTO obterClientePorId(Long clienteId);
     ClienteResponseDTO editarCliente(Long clienteId, ClienteRequestDTO clienteDTO);
     void deletarCliente(Long clienteId);
 }
