@@ -1,5 +1,6 @@
 package io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.config;
 
+import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.auth.filter.JwtCustomAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -20,17 +22,22 @@ import org.springframework.security.web.SecurityFilterChain;
 public class ResourceServerConfiguration {
 
     @Bean
-    public SecurityFilterChain resourceServerSecurityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain resourceServerSecurityFilterChain(HttpSecurity http, JwtCustomAuthenticationFilter jwtCustomAuthenticationFilter) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
+                .formLogin(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> {
+                    authorize.requestMatchers("/login/**").permitAll();
                     authorize.requestMatchers(HttpMethod.POST, "/api/clientes/**").permitAll();
-                    authorize.anyRequest().permitAll();
+                    authorize.requestMatchers(HttpMethod.POST, "/api/oauth-clients/**").permitAll();
+                    authorize.requestMatchers("/h2-console/**").permitAll();
+                    authorize.anyRequest().authenticated();
                 })
                 .oauth2ResourceServer(resourceServer ->
                         resourceServer.jwt(Customizer.withDefaults())
                 )
+                .addFilterAfter(jwtCustomAuthenticationFilter, BearerTokenAuthenticationFilter.class)
                 .build();
     }
 

@@ -4,6 +4,7 @@ import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Cliente;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.cliente.ClienteRepository;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.exception.excecoes.RegistroNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,9 +12,12 @@ import org.springframework.stereotype.Service;
 public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteRepository clienteRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Cliente salvarCliente(Cliente cliente) {
+        String senha = cliente.getSenha();
+        cliente.setSenha(passwordEncoder.encode(senha));
         return clienteRepository.save(cliente);
     }
 
