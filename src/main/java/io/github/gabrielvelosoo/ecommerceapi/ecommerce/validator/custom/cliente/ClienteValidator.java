@@ -1,4 +1,4 @@
-package io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.cliente;
+package io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.custom.cliente;
 
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Cliente;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.cliente.ClienteRepository;
@@ -16,7 +16,7 @@ public class ClienteValidator {
 
     public void validar(Cliente cliente) {
         if(clientePossuiEmailCadastrado(cliente)) {
-           throw new RegistroDuplicadoException("O e-mail " + cliente.getEmail() + " já está cadastrado");
+           throw new RegistroDuplicadoException("Já existe uma conta cadastrada com esse endereço de e-mail");
         }
     }
 

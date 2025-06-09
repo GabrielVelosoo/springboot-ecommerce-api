@@ -5,7 +5,7 @@ import io.github.gabrielvelosoo.ecommerceapi.dominio.service.produto.CategoriaSe
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.CategoriaRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.CategoriaResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.produto.CategoriaMapper;
-import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.produto.CategoriaValidator;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.custom.produto.CategoriaValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

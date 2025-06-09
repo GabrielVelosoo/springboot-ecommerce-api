@@ -3,10 +3,12 @@ package io.github.gabrielvelosoo.ecommerceapi.infraestrutura.controller.cliente;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.cliente.ClienteUseCase;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.groups.OrdemValidacao;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.controller.GenericController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -19,7 +21,7 @@ public class ClienteController implements GenericController {
     private final ClienteUseCase clienteUseCase;
 
     @PostMapping
-    public ResponseEntity<ClienteResponseDTO> salvarCliente(@RequestBody @Valid ClienteRequestDTO clienteDTO) {
+    public ResponseEntity<ClienteResponseDTO> salvarCliente(@RequestBody @Validated(OrdemValidacao.class) ClienteRequestDTO clienteDTO) {
         ClienteResponseDTO clienteDTOResponse = clienteUseCase.salvarCliente(clienteDTO);
         URI location = gerarHeaderLocation(clienteDTOResponse.id());
         return ResponseEntity.created(location).body(clienteDTOResponse);

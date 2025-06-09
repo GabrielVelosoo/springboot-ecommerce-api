@@ -5,7 +5,7 @@ import io.github.gabrielvelosoo.ecommerceapi.dominio.service.produto.ProdutoServ
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.ProdutoRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.ProdutoResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.produto.ProdutoMapper;
-import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.produto.ProdutoValidator;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.custom.produto.ProdutoValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;

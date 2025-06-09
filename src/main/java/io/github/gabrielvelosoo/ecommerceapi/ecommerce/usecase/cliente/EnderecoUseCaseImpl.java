@@ -5,7 +5,7 @@ import io.github.gabrielvelosoo.ecommerceapi.dominio.service.cliente.EnderecoSer
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.cliente.EnderecoMapper;
-import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.cliente.EnderecoValidator;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.custom.cliente.EnderecoValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

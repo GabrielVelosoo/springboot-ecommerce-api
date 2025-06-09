@@ -1,4 +1,4 @@
-package io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.produto;
+package io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.custom.produto;
 
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.produto.Categoria;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.CategoriaRepository;

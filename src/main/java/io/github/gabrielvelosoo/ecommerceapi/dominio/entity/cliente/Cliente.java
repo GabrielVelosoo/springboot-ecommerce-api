@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +23,17 @@ public class Cliente extends Usuario {
     @Column(nullable = false, length = 100)
     private String sobrenome;
 
-    @Column(unique = true, length = 11)
+    @Column(nullable = false, unique = true, length = 11)
     private String cpf;
+
+    @Column(nullable = false, length = 8)
+    private String cep;
 
     @Column(length = 15)
     private String telefone;
 
-    @Column(name = "dt_nascimento", nullable = false)
-    private LocalDateTime dataNascimento;
+    @Column(nullable = false, name = "dt_nascimento")
+    private LocalDate dataNascimento;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonIgnore

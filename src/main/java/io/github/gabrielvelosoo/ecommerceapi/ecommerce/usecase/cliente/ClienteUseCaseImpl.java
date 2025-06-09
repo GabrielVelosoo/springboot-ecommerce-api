@@ -8,12 +8,10 @@ import io.github.gabrielvelosoo.ecommerceapi.dominio.service.usuario.UsuarioServ
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.cliente.ClienteMapper;
-import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.cliente.ClienteValidator;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.custom.cliente.ClienteValidator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +28,6 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
     public ClienteResponseDTO salvarCliente(ClienteRequestDTO clienteDTO) {
         Cliente cliente = clienteMapper.toEntityComCarrinho(clienteDTO);
         clienteValidator.validar(cliente);
-        associarEndereco(cliente);
         Cliente clienteSalvo = clienteService.salvarCliente(cliente);
         Role role = roleService.obterRolePorNome("USER");
         usuarioService.adicionarRoleUser(clienteSalvo, role);
@@ -41,11 +38,6 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
     public ClienteResponseDTO obterClientePorId(Long clienteId) {
         Cliente cliente = clienteService.obterClientePorId(clienteId);
         return clienteMapper.toDTO(cliente);
-    }
-
-    public void associarEndereco(Cliente cliente) {
-        Optional.ofNullable(cliente.getEnderecos())
-                .ifPresent(enderecos -> enderecos.forEach(endereco -> endereco.setCliente(cliente)));
     }
 
     @Override

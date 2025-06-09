@@ -23,6 +23,5 @@ public abstract class ClienteMapper {
     public void editarCliente(Cliente cliente, ClienteRequestDTO clienteDTO) {
         cliente.setNome(clienteDTO.nome());
         cliente.setCpf(clienteDTO.cpf());
-        cliente.setTelefone(clienteDTO.telefone());
     }
 }

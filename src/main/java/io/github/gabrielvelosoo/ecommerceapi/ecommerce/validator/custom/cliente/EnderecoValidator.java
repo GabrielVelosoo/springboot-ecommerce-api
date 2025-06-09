@@ -1,4 +1,4 @@
-package io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.cliente;
+package io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.custom.cliente;
 
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Endereco;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.cliente.ClienteRepository;
