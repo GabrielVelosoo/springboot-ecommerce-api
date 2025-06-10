@@ -49,13 +49,15 @@ public class AuthorizationServerConfiguration {
                 .with(authorizationServerConfigurer, authorizationServer ->
                         authorizationServer.oidc(Customizer.withDefaults())
                 )
-                .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests.anyRequest().authenticated()
+                .authorizeHttpRequests(auth ->
+                        auth.anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(resourceServer ->
                         resourceServer.jwt(Customizer.withDefaults())
                 )
-                .formLogin(Customizer.withDefaults())
+                .formLogin(configurer ->
+                        configurer.loginPage("/login").permitAll()
+                )
                 .build();
     }
 

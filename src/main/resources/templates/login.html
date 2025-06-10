@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Login </title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #FFF8DC;
+      }
+
+      .login-page {
+        height: 130vh;
+        width: 100%;
+        background-color: rgb(255, 0, 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .login-container {
+        max-width: 400px;
+        width: 90%;
+        height: auto;
+        margin: 40px auto;
+        padding: 2rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #fff;
+        border: 1px solid black;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .login-title > h1 {
+        color: black;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .login-form {
+        margin-bottom: 15px;
+      }
+
+      .login-form-group {
+        margin-bottom: 15px;
+        position: relative;
+        flex: 1;
+      }
+
+      .login-form-group > label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
+        color: black;
+      }
+
+      .login-form-control {
+        width: 100%;
+        padding: 8px 10px;
+        color: black;
+        box-sizing: border-box;
+        border-radius: 4px;
+        border: 1px solid black;
+      }
+
+      .login-form-button-group {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .login-form-button-group > button {
+        width: 50%;
+        padding: 10px;
+        border: 1px solid black;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: rgb(255, 0, 0);
+        font-weight: bold;
+        transition: filter 0.2s ease;
+      }
+
+      .login-form-button-group > button:hover {
+        background-color: rgb(255, 70, 70);
+      }
+    </style>
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-container">
+      <div class="login-title">
+        <h1> Entre na sua conta </h1>
+      </div>
+
+      <form method="post" th:action="@{/login}" class="login-form">
+        <div class="login-form-group">
+          <label for="email">E-mail</label>
+          <input
+                  type="email"
+                  placeholder="Digite seu e-mail"
+                  id="email"
+                  name="username"
+                  required
+                  class="login-form-control"
+          />
+        </div>
+
+        <div class="login-form-group">
+          <label for="senha">Senha</label>
+          <input
+                  type="password"
+                  placeholder="Digite sua senha"
+                  id="senha"
+                  name="password"
+                  required
+                  class="login-form-control"
+          />
+        </div>
+
+        <div class="login-form-button-group">
+          <button type="submit"> Entrar </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -25,10 +25,14 @@ public class ResourceServerConfiguration {
     public SecurityFilterChain resourceServerSecurityFilterChain(HttpSecurity http, JwtCustomAuthenticationFilter jwtCustomAuthenticationFilter) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
-                .formLogin(Customizer.withDefaults())
+                .headers(headers ->
+                        headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
+                )
+                .formLogin(configurer ->
+                        configurer.loginPage("/login").permitAll()
+                )
                 .authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers("/login/**").permitAll();
+                    authorize.requestMatchers("/css/**", "/js/**", "/images/**").permitAll();
                     authorize.requestMatchers(HttpMethod.POST, "/api/clientes/**").permitAll();
                     authorize.requestMatchers(HttpMethod.POST, "/api/oauth-clients/**").permitAll();
                     authorize.requestMatchers("/h2-console/**").permitAll();
