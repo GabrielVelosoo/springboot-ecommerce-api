@@ -22,7 +22,7 @@ public class OAuthClient implements Serializable {
     @Column(name = "client_id", nullable = false, unique = true, length = 150)
     private String clientId;
 
-    @Column(name = "client_secret", nullable = false, length = 400)
+    @Column(name = "client_secret", length = 400)
     private String clientSecret;
 
     @Column(name = "redirect_uri", nullable = false, length = 200)

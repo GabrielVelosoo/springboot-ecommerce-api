@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
     @Column(length = 300, nullable = false)
     private String senha;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<UsuarioRole> usuarioRoles = new HashSet<>();
 
     @CreatedDate

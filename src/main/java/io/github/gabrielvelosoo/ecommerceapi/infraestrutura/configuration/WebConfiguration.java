@@ -18,7 +18,7 @@ import java.util.List;
 public class WebConfiguration implements WebMvcConfigurer {
 
     @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilterFilterRegistrationBean() {
+    public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean() {
         List<String> all = List.of("*");
 
         CorsConfiguration config = new CorsConfiguration();

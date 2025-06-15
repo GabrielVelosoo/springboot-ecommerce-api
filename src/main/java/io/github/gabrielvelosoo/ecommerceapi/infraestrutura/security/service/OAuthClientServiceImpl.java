@@ -16,8 +16,10 @@ public class OAuthClientServiceImpl implements OAuthClientService {
 
     @Override
     public OAuthClient salvarClient(OAuthClient oauthClient) {
-        String secretCriptografada = passwordEncoder.encode(oauthClient.getClientSecret());
-        oauthClient.setClientSecret(secretCriptografada);
+        if(oauthClient.getClientSecret() != null) {
+            String secretCriptografada = passwordEncoder.encode(oauthClient.getClientSecret());
+            oauthClient.setClientSecret(secretCriptografada);
+        }
         return oAuthClientRepository.save(oauthClient);
     }
 
