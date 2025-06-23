@@ -37,12 +37,12 @@ public class CustomRegisteredClientRepository implements RegisteredClientReposit
                 .withId(oAuthClient.getId().toString())
                 .clientId(oAuthClient.getClientId())
                 .redirectUri(oAuthClient.getRedirectUri())
+                .redirectUri("http://localhost:4200/silent-refresh.html")
                 .scope(OidcScopes.OPENID)
                 .scope(oAuthClient.getScope())
                 .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .tokenSettings(tokenSettings)
                 .clientSettings(clientSettings)
                 .build();
