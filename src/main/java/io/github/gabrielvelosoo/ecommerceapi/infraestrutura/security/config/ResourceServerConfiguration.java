@@ -32,7 +32,6 @@ public class ResourceServerConfiguration {
                         configurer.loginPage("/login").permitAll()
                 )
                 .authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers("/css/**", "/js/**", "/images/**").permitAll();
                     authorize.requestMatchers(HttpMethod.POST, "/api/clientes/**").permitAll();
                     authorize.requestMatchers(HttpMethod.POST, "/api/oauth-clients/**").permitAll();
                     authorize.requestMatchers("/h2-console/**").permitAll();
