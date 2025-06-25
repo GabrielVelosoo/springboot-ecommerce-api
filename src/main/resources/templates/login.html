@@ -18,7 +18,7 @@
       .login-page {
         height: 130vh;
         width: 100%;
-        background-color: rgb(255, 0, 0);
+        background-color: #2c3e50;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -82,13 +82,34 @@
         color: white;
         border-radius: 4px;
         cursor: pointer;
-        background-color: rgb(255, 0, 0);
+        background-color: #2c3e50;
         font-weight: bold;
         transition: filter 0.2s ease;
       }
 
       .login-form-button-group > button:hover {
-        background-color: rgb(255, 70, 70);
+        background-color: #34495e;
+      }
+
+      .login-footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        flex-wrap: wrap;
+      }
+
+      .login-footer > p {
+        color: black;
+        margin: 0;
+      }
+
+      .login-footer > a {
+        margin-left: 6px;
+        color: #2c3e50;
+        font-weight: bold;
+        text-decoration: none;
+        cursor: pointer;
       }
     </style>
 </head>
@@ -128,6 +149,12 @@
           <button type="submit"> Entrar </button>
         </div>
       </form>
+
+      <div class="login-footer">
+        <p> Não possui uma conta? </p>
+        <a href="http://localhost:4200/auth/register"> Cadastre-se </a>
+      </div>
+
     </div>
   </div>
 </body>
