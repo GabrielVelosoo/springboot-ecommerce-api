@@ -2,12 +2,15 @@ package io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.cliente;
 
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Cliente;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario.Role;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario.Usuario;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.cliente.ClienteService;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.usuario.RoleService;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.usuario.UsuarioService;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteResponseDTO;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.usuario.UsuarioResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.cliente.ClienteMapper;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.usuario.UsuarioMapper;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.custom.cliente.ClienteValidator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,7 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
     private final RoleService roleService;
     private final ClienteMapper clienteMapper;
     private final ClienteValidator clienteValidator;
+    private final UsuarioMapper usuarioMapper;
 
     @Override
     @Transactional
@@ -53,5 +57,11 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
     public void deletarCliente(Long clienteId) {
         Cliente cliente = clienteService.obterClientePorId(clienteId);
         clienteService.deletarCliente(cliente);
+    }
+
+    @Override
+    public UsuarioResponseDTO obterUsuarioLogado() {
+        Usuario usuario = usuarioService.obterUsuarioLogado();
+        return usuarioMapper.toDTO(usuario);
     }
 }

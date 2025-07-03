@@ -2,6 +2,7 @@ package io.github.gabrielvelosoo.ecommerceapi.infraestrutura.controller.cliente;
 
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteResponseDTO;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.usuario.UsuarioResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.cliente.ClienteUseCase;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.groups.OrdemValidacao;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.controller.GenericController;
@@ -45,5 +46,11 @@ public class ClienteController implements GenericController {
     public ResponseEntity<Void> deletarCliente(@PathVariable(name = "id") Long clienteId) {
         clienteUseCase.deletarCliente(clienteId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/me")
+    public ResponseEntity<UsuarioResponseDTO> obterUsuarioLogado() {
+        UsuarioResponseDTO usuarioDTO = clienteUseCase.obterUsuarioLogado();
+        return ResponseEntity.ok(usuarioDTO);
     }
 }

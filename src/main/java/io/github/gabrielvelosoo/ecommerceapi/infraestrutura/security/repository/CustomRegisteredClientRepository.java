@@ -21,7 +21,7 @@ public class CustomRegisteredClientRepository implements RegisteredClientReposit
     private final ClientSettings clientSettings;
 
     @Override
-    public void save(RegisteredClient registeredClient) {}
+    public void save(RegisteredClient registeredClient) { }
 
     @Override
     public RegisteredClient findById(String id) {
