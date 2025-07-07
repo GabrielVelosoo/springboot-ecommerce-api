@@ -24,6 +24,13 @@ public class Categoria implements Serializable {
     @Column(nullable = false, unique = true, length = 50)
     private String nome;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_pai_id")
+    private Categoria categoriaPai;
+
+    @OneToMany(mappedBy = "categoriaPai")
+    private List<Categoria> subcategorias = new ArrayList<>();
+
     @OneToMany(mappedBy = "categoria")
     private List<Produto> produtos = new ArrayList<>();
 
