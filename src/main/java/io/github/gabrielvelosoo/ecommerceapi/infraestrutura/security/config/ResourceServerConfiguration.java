@@ -33,6 +33,7 @@ public class ResourceServerConfiguration {
                 )
                 .authorizeHttpRequests(authorize -> {
                     authorize.requestMatchers(HttpMethod.POST, "/api/clientes/**").permitAll();
+                    authorize.requestMatchers("/api/categorias/**").permitAll();
                     authorize.requestMatchers(HttpMethod.POST, "/api/oauth-clients/**").permitAll();
                     authorize.requestMatchers("/h2-console/**").permitAll();
                     authorize.anyRequest().authenticated();

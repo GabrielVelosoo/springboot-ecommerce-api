@@ -22,14 +22,20 @@ public class CategoriaUseCaseImpl implements CategoriaUseCase {
     @Override
     public CategoriaResponseDTO salvarCategoria(CategoriaRequestDTO categoriaDTO) {
         Categoria categoria = categoriaMapper.toEntity(categoriaDTO);
+
+        if(categoriaDTO.categoriaPaiId() != null) {
+            Categoria pai = categoriaService.obterCategoriaPorId(categoriaDTO.categoriaPaiId());
+            categoria.setCategoriaPai(pai);
+        }
+
         categoriaValidator.validar(categoria);
         Categoria categoriaSalva = categoriaService.salvarCategoria(categoria);
         return categoriaMapper.toDTO(categoriaSalva);
     }
 
     @Override
-    public List<CategoriaResponseDTO> obterCategorias() {
-        List<Categoria> categorias = categoriaService.obterCategorias();
+    public List<CategoriaResponseDTO> obterCategoriasRaizes() {
+        List<Categoria> categorias = categoriaService.obterCategoriasRaizes();
         return categoriaMapper.toDTOs(categorias);
     }
 }

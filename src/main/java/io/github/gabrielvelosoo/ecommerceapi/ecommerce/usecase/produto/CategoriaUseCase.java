@@ -8,5 +8,5 @@ import java.util.List;
 public interface CategoriaUseCase {
 
     CategoriaResponseDTO salvarCategoria(CategoriaRequestDTO categoriaDTO);
-    List<CategoriaResponseDTO> obterCategorias();
+    List<CategoriaResponseDTO> obterCategoriasRaizes();
 }

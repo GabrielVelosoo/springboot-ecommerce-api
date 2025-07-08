@@ -7,5 +7,6 @@ import java.util.List;
 public interface CategoriaService {
 
     Categoria salvarCategoria(Categoria categoria);
-    List<Categoria> obterCategorias();
+    List<Categoria> obterCategoriasRaizes();
+    Categoria obterCategoriaPorId(Long id);
 }

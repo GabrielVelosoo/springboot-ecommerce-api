@@ -27,8 +27,8 @@ public class CategoriaController implements GenericController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoriaResponseDTO>> obterCategorias() {
-        List<CategoriaResponseDTO> categoriasDTO = categoriaUseCase.obterCategorias();
+    public ResponseEntity<List<CategoriaResponseDTO>> obterCategoriasRaizes() {
+        List<CategoriaResponseDTO> categoriasDTO = categoriaUseCase.obterCategoriasRaizes();
         return ResponseEntity.ok(categoriasDTO);
     }
 }

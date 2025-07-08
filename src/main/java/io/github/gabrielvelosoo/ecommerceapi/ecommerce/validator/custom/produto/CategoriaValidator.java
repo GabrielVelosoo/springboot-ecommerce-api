@@ -21,10 +21,13 @@ public class CategoriaValidator {
     }
 
     private boolean categoriaExiste(Categoria categoria) {
-        Optional<Categoria> categoriaOptional = categoriaRepository.findByNome(categoria.getNome());
+        Optional<Categoria> categoriaOptional = categoriaRepository
+                .findByNomeAndCategoriaPai(categoria.getNome(), categoria.getCategoriaPai());
+
         if(categoria.getId() == null) {
             return categoriaOptional.isPresent();
         }
+
         return categoriaOptional
                 .map(c -> !c.getId().equals(categoria.getId()))
                 .orElse(false);

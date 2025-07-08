@@ -2,6 +2,7 @@ package io.github.gabrielvelosoo.ecommerceapi.dominio.service.produto;
 
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.produto.Categoria;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.CategoriaRepository;
+import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.exception.excecoes.RegistroNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,19 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public List<Categoria> obterCategorias() {
-        return categoriaRepository.findAll();
+    public List<Categoria> obterCategoriasRaizes() {
+        List<Categoria> categoriasRaiz = categoriaRepository.findByCategoriaPaiIsNull();
+        categoriasRaiz.forEach(this::carregarSubcategorias);
+        return categoriasRaiz;
+    }
+
+    private void carregarSubcategorias(Categoria categoria) {
+        categoria.getSubcategorias().forEach(this::carregarSubcategorias);
+    }
+
+    @Override
+    public Categoria obterCategoriaPorId(Long id) {
+        return categoriaRepository.findById(id)
+                .orElseThrow( () -> new RegistroNaoEncontradoException("Categoria não encontrada"));
     }
 }
