@@ -28,6 +28,9 @@ public class OAuthClient implements Serializable {
     @Column(name = "redirect_uri", nullable = false, length = 200)
     private String redirectUri;
 
+    @Column(name = "post_logout_redirect_uri", nullable = false, length = 200)
+    private String postLogoutRedirectUri;
+
     @Column(length = 50)
     private String scope;
 

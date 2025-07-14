@@ -38,6 +38,7 @@ public class CustomRegisteredClientRepository implements RegisteredClientReposit
                 .clientId(oAuthClient.getClientId())
                 .redirectUri(oAuthClient.getRedirectUri())
                 .redirectUri("http://localhost:4200/silent-refresh.html")
+                .postLogoutRedirectUri(oAuthClient.getPostLogoutRedirectUri())
                 .scope(OidcScopes.OPENID)
                 .scope(oAuthClient.getScope())
                 .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)

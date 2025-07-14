@@ -4,6 +4,7 @@ public record OAuthClientRequestDTO(
         String clientId,
         String clientSecret,
         String redirectUri,
+        String postLogoutRedirectUri,
         String scope
     ) {
 }
