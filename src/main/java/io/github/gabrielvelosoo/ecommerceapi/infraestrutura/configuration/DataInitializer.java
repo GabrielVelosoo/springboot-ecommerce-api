@@ -1,28 +1,24 @@
 package io.github.gabrielvelosoo.ecommerceapi.infraestrutura.configuration;
 
-import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario.Role;
-import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.usuario.RoleRepository;
+import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.configuration.service.InitializationService;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.entity.OAuthClient;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.repository.OAuthClientRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class DataInitializer {
+
+    private final InitializationService initializationService;
 
     @Bean
     @Transactional
-    CommandLineRunner initRoles(RoleRepository roleRepository) {
-        return args -> {
-            if(roleRepository.findByNome("ADMIN").isEmpty()) {
-                roleRepository.save(new Role("ADMIN"));
-            }
-            if(roleRepository.findByNome("USER").isEmpty()) {
-                roleRepository.save(new Role("USER"));
-            }
-        };
+    CommandLineRunner initRolesAndAdminUser() {
+        return args -> initializationService.initRolesAndAdminUser();
     }
 
     @Bean

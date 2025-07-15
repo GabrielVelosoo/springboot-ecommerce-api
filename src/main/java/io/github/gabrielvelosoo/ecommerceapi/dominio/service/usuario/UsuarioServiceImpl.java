@@ -5,6 +5,7 @@ import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario.Usuario;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario.UsuarioRole;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.usuario.UsuarioRepository;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.usuario.UsuarioRoleRepository;
+import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.exception.excecoes.RegistroNaoEncontradoException;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.auth.CustomAuthentication;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -26,7 +27,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario obterUsuarioPorEmail(String email) {
-        return usuarioRepository.findByEmail(email);
+        return usuarioRepository.findByEmail(email)
+                .orElseThrow( () -> new RegistroNaoEncontradoException("Usuário com este e-mail não encontrado"));
     }
 
     @Override

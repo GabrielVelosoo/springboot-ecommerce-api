@@ -46,6 +46,11 @@ public class Role implements Serializable {
         this.nome = nome;
     }
 
+    public Role(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
