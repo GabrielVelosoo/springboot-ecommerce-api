@@ -31,7 +31,6 @@ public class DataInitializer {
                 client.setClientId(clientId);
                 client.setClientSecret(null);
                 client.setRedirectUri("http://localhost:4200/auth/oauth2-callback");
-                client.setPostLogoutRedirectUri("http://localhost:4200/home");
                 client.setScope("USER");
 
                 clientRepository.save(client);

@@ -41,6 +41,11 @@ public class ResourceServerConfiguration {
                 .oauth2ResourceServer(resourceServer ->
                         resourceServer.jwt(Customizer.withDefaults())
                 )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("http://localhost:4200/home")
+                        .clearAuthentication(true)
+                        .invalidateHttpSession(true)
+                )
                 .addFilterAfter(jwtCustomAuthenticationFilter, BearerTokenAuthenticationFilter.class)
                 .build();
     }
