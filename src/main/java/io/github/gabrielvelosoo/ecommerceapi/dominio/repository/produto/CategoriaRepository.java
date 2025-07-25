@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
+    Optional<Categoria> findByNome(String nome);
     Optional<Categoria> findByNomeAndCategoriaPai(String nome, Categoria categoriaPai);
     List<Categoria> findByCategoriaPaiIsNull();
 }

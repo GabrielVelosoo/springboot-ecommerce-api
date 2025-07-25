@@ -41,4 +41,10 @@ public class Categoria implements Serializable {
     @LastModifiedDate
     @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
+
+    public Categoria() { }
+
+    public Categoria(String nome) {
+        this.nome = nome;
+    }
 }

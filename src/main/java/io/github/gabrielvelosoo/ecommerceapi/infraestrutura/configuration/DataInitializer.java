@@ -1,5 +1,7 @@
 package io.github.gabrielvelosoo.ecommerceapi.infraestrutura.configuration;
 
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.produto.Categoria;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.CategoriaRepository;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.configuration.service.InitializationService;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.entity.OAuthClient;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.repository.OAuthClientRepository;
@@ -34,6 +36,25 @@ public class DataInitializer {
                 client.setScope("USER");
 
                 clientRepository.save(client);
+            }
+        };
+    }
+
+    @Bean
+    @Transactional
+    CommandLineRunner initCategoriasPai(CategoriaRepository categoriaRepository) {
+        return args -> {
+            if(categoriaRepository.findByNome("Roupas").isEmpty()) {
+                categoriaRepository.save(new Categoria("Roupas"));
+            }
+            if(categoriaRepository.findByNome("Calçados").isEmpty()) {
+                categoriaRepository.save(new Categoria("Calçados"));
+            }
+            if(categoriaRepository.findByNome("Acessórios").isEmpty()) {
+                categoriaRepository.save(new Categoria("Acessórios"));
+            }
+            if(categoriaRepository.findByNome("Ofertas").isEmpty()) {
+                categoriaRepository.save(new Categoria("Ofertas"));
             }
         };
     }

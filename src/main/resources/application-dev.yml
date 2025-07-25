@@ -14,8 +14,3 @@ spring:
     console:
       enabled: true
       path: /h2-console
-logging:
-  level:
-    root: info
-    org.springframework.security: DEBUG
-    org.springframework.security.oauth2.server.authorization: DEBUG
