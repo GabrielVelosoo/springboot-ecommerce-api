@@ -11,6 +11,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Configuration
 @RequiredArgsConstructor
 public class DataInitializer {
@@ -44,17 +48,24 @@ public class DataInitializer {
     @Transactional
     CommandLineRunner initCategoriasPai(CategoriaRepository categoriaRepository) {
         return args -> {
-            if(categoriaRepository.findByNome("Roupas").isEmpty()) {
-                categoriaRepository.save(new Categoria("Roupas"));
-            }
-            if(categoriaRepository.findByNome("Calçados").isEmpty()) {
-                categoriaRepository.save(new Categoria("Calçados"));
-            }
-            if(categoriaRepository.findByNome("Acessórios").isEmpty()) {
-                categoriaRepository.save(new Categoria("Acessórios"));
-            }
-            if(categoriaRepository.findByNome("Ofertas").isEmpty()) {
-                categoriaRepository.save(new Categoria("Ofertas"));
+            Map<String, List<String>> estrutura = new HashMap<>();
+            estrutura.put("Roupas", List.of("Masculinas", "Femininas", "Infantis"));
+            estrutura.put("Calçados", List.of("Esportivos", "Casuais"));
+            estrutura.put("Acessórios", List.of("Relógios", "Óculos"));
+            estrutura.put("Ofertas", List.of("Promoções de Verão", "Queima de Estoque"));
+            for(Map.Entry<String, List<String>> entry : estrutura.entrySet()) {
+                String nomePai = entry.getKey();
+                List<String> filhos = entry.getValue();
+                Categoria categoriaPai = categoriaRepository.findByNome(nomePai)
+                        .orElseGet(() -> categoriaRepository.save(new Categoria(nomePai)));
+                for(String nomeFilho : filhos) {
+                    boolean existe = categoriaRepository
+                            .findByNomeAndCategoriaPai(nomeFilho, categoriaPai)
+                            .isPresent();
+                    if(!existe) {
+                        categoriaRepository.save(new Categoria(nomeFilho, categoriaPai));
+                    }
+                }
             }
         };
     }
