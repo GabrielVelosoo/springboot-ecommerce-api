@@ -10,6 +10,7 @@ import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.auth.Custom
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @SuppressWarnings("ALL")
@@ -19,6 +20,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final UsuarioRoleRepository usuarioRoleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void adicionarRoleUser(Usuario usuario, Role role) {
@@ -38,5 +40,12 @@ public class UsuarioServiceImpl implements UsuarioService {
             return auth.usuario();
         }
         return null;
+    }
+
+    @Override
+    public void alterarSenha(String novaSenha, Usuario usuarioLogado) {
+        String novaSenhaCodificada = passwordEncoder.encode(novaSenha);
+        usuarioLogado.setSenha(novaSenhaCodificada);
+        usuarioRepository.save(usuarioLogado);
     }
 }

@@ -8,4 +8,5 @@ public interface UsuarioService {
     void adicionarRoleUser(Usuario usuario, Role role);
     Usuario obterUsuarioPorEmail(String email);
     Usuario obterUsuarioLogado();
+    void alterarSenha(String novaSenha, Usuario usuarioLogado);
 }

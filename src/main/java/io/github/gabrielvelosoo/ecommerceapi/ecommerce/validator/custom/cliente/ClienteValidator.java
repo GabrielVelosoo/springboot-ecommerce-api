@@ -20,7 +20,7 @@ public class ClienteValidator {
         }
     }
 
-    public boolean clientePossuiEmailCadastrado(Cliente cliente) {
+    private boolean clientePossuiEmailCadastrado(Cliente cliente) {
         Optional<Cliente> clienteOptional = clienteRepository.findByEmail(cliente.getEmail());
         if(cliente.getId() == null) {
             return clienteOptional.isPresent();
