@@ -38,7 +38,6 @@ public class DataInitializer {
                 client.setClientSecret(null);
                 client.setRedirectUri("http://localhost:4200/auth/oauth2-callback");
                 client.setScope("USER");
-
                 clientRepository.save(client);
             }
         };
