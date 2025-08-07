@@ -24,6 +24,7 @@ public abstract class EnderecoMapper {
 
     public void editarEndereco(Endereco endereco, EnderecoRequestDTO enderecoDTO) {
         endereco.setNomeContato(enderecoDTO.nomeContato());
+        endereco.setSobrenomeContato(enderecoDTO.sobrenomeContato());
         endereco.setTelefoneContato(enderecoDTO.telefoneContato());
         endereco.setRua(enderecoDTO.rua());
         endereco.setNumero(enderecoDTO.numero());

@@ -3,6 +3,8 @@ package io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.usuario;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario.Usuario;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.usuario.UsuarioService;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.usuario.AlterarSenhaDTO;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.usuario.UsuarioResponseDTO;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.usuario.UsuarioMapper;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.custom.usuario.UsuarioValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,13 @@ public class UsuarioUseCaseImpl implements UsuarioUseCase {
 
     private final UsuarioService usuarioService;
     private final UsuarioValidator usuarioValidator;
+    private final UsuarioMapper usuarioMapper;
+
+    @Override
+    public UsuarioResponseDTO obterUsuarioLogado() {
+        Usuario usuario = usuarioService.obterUsuarioLogado();
+        return usuarioMapper.toDTO(usuario);
+    }
 
     @Override
     public void alterarSenha(AlterarSenhaDTO senhasDTO) {

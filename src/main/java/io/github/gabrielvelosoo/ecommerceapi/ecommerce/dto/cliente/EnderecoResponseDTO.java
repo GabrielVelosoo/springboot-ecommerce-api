@@ -3,6 +3,7 @@ package io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente;
 public record EnderecoResponseDTO(
         Long id,
         String nomeContato,
+        String sobrenomeContato,
         String telefoneContato,
         String rua,
         String numero,

@@ -26,9 +26,9 @@ public class EnderecoController implements GenericController {
         return ResponseEntity.created(location).body(enderecoDTOResponse);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<List<EnderecoResponseDTO>> obterEnderecosClienteId(@PathVariable(name = "id") Long clienteId) {
-        List<EnderecoResponseDTO> enderecosDTO = enderecoUseCase.obterEnderecosClienteId(clienteId);
+    @GetMapping
+    public ResponseEntity<List<EnderecoResponseDTO>> obterEnderecosUsuarioLogado() {
+        List<EnderecoResponseDTO> enderecosDTO = enderecoUseCase.obterEnderecosUsuarioLogado();
         return ResponseEntity.ok(enderecosDTO);
     }
 

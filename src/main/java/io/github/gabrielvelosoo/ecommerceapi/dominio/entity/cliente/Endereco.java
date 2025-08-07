@@ -22,6 +22,9 @@ public class Endereco implements Serializable {
     @Column(name = "nome_contato", nullable = false, length = 100)
     private String nomeContato;
 
+    @Column(name = "sobrenome_contato", nullable = false, length = 100)
+    private String sobrenomeContato;
+
     @Column(name = "telefone_contato", nullable = false, length = 15)
     private String telefoneContato;
 

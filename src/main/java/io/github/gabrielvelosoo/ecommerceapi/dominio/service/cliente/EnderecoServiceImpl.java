@@ -28,11 +28,11 @@ public class EnderecoServiceImpl implements EnderecoService {
     }
 
     @Override
-    public List<Endereco> obterEnderecosClienteId(Long clienteId) {
-        if(!clienteRepository.existsById(clienteId)) {
-            throw new RegistroNaoEncontradoException("Cliente não encontrado");
+    public List<Endereco> obterEnderecosUsuarioLogado(Long usuarioId) {
+        if(!clienteRepository.existsById(usuarioId)) {
+            throw new RegistroNaoEncontradoException("Usuário não encontrado");
         }
-        return enderecoRepository.findByClienteId(clienteId);
+        return enderecoRepository.findByClienteId(usuarioId);
     }
 
     @Override
