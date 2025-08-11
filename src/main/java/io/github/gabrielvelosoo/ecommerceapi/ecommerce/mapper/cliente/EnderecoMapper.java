@@ -1,22 +1,15 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.cliente;
 
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Endereco;
-import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.cliente.ClienteRepository;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoResponseDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = ClienteMapper.class)
 public abstract class EnderecoMapper {
 
-    @Autowired
-    ClienteRepository clienteRepository;
-
-    @Mapping(target = "cliente", expression = "java( clienteRepository.findById(enderecoDTO.clienteId()).orElse(null) )")
     public abstract Endereco toEntity(EnderecoRequestDTO enderecoDTO);
 
     public abstract EnderecoResponseDTO toDTO(Endereco endereco);
@@ -26,7 +19,7 @@ public abstract class EnderecoMapper {
         endereco.setNomeContato(enderecoDTO.nomeContato());
         endereco.setSobrenomeContato(enderecoDTO.sobrenomeContato());
         endereco.setTelefoneContato(enderecoDTO.telefoneContato());
-        endereco.setRua(enderecoDTO.rua());
+        endereco.setEndereco(enderecoDTO.endereco());
         endereco.setNumero(enderecoDTO.numero());
         endereco.setBairro(enderecoDTO.bairro());
         endereco.setCidade(enderecoDTO.cidade());

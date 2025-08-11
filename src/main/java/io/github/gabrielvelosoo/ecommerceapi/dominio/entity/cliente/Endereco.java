@@ -29,7 +29,7 @@ public class Endereco implements Serializable {
     private String telefoneContato;
 
     @Column(nullable = false, length = 150)
-    private String rua;
+    private String endereco;
 
     @Column(nullable = false, length = 10)
     private String numero;

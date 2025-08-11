@@ -1,7 +1,9 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.cliente;
 
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Cliente;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Endereco;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario.Usuario;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.service.cliente.ClienteService;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.cliente.EnderecoService;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.usuario.UsuarioService;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoRequestDTO;
@@ -19,12 +21,16 @@ public class EnderecoUseCaseImpl implements EnderecoUseCase {
 
     private final EnderecoService enderecoService;
     private final UsuarioService usuarioService;
+    private final ClienteService clienteService;
     private final EnderecoMapper enderecoMapper;
     private final EnderecoValidator enderecoValidator;
 
     @Override
     public EnderecoResponseDTO salvarEndereco(EnderecoRequestDTO enderecoDTO) {
         Endereco endereco = enderecoMapper.toEntity(enderecoDTO);
+        Usuario usuarioLogado = usuarioService.obterUsuarioLogado();
+        Cliente cliente = clienteService.obterClientePorId(usuarioLogado.getId());
+        endereco.setCliente(cliente);
         enderecoValidator.validar(endereco);
         Endereco enderecoSalvo = enderecoService.salvarEndereco(endereco);
         return enderecoMapper.toDTO(enderecoSalvo);

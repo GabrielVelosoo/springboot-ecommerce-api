@@ -3,6 +3,7 @@ package io.github.gabrielvelosoo.ecommerceapi.dominio.service.produto;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.produto.Categoria;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.CategoriaRepository;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.exception.excecoes.RegistroNaoEncontradoException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
+    @Transactional
     public List<Categoria> obterCategoriasRaizes() {
         List<Categoria> categoriasRaiz = categoriaRepository.findByCategoriaPaiIsNull();
         categoriasRaiz.forEach(this::carregarSubcategorias);

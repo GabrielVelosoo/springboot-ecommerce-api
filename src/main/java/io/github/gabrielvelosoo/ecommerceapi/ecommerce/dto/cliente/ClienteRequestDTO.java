@@ -32,7 +32,7 @@ public record ClienteRequestDTO(
         @NotBlank(message = "Campo obrigatório", groups = ValidaNotBlank.class)
         String cep,
 
-        @NotNull(message = "Campo obrigatório")
+        @NotNull(message = "Campo obrigatório", groups = ValidaNotBlank.class)
         LocalDate dataNascimento
     ) {
 }
