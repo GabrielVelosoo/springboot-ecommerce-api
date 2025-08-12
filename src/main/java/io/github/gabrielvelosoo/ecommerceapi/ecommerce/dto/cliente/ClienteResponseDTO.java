@@ -25,13 +25,13 @@ public record ClienteResponseDTO(
 
     @JsonGetter("cpf")
     public String getCpfFormatado() {
-        if (cpf == null || cpf.length() != 11) return cpf;
+        if(cpf == null || cpf.length() != 11) return cpf;
         return cpf.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
     }
 
     @JsonGetter("cep")
     public String getCepFormatado() {
-        if (cep == null || cep.length() != 8) return cep;
+        if(cep == null || cep.length() != 8) return cep;
         return cep.replaceAll("(\\d{5})(\\d{3})", "$1-$2");
     }
 }

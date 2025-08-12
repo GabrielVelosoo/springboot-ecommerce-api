@@ -21,7 +21,7 @@ public record EnderecoResponseDTO(
 
     @JsonGetter("cep")
     public String getCepFormatado() {
-        if (cep == null || cep.length() != 8) return cep;
+        if(cep == null || cep.length() != 8) return cep;
         return cep.replaceAll("(\\d{5})(\\d{3})", "$1-$2");
     }
 }

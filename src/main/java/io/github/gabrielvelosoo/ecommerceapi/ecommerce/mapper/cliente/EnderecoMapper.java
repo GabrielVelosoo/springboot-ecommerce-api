@@ -25,5 +25,6 @@ public abstract class EnderecoMapper {
         endereco.setCidade(enderecoDTO.cidade());
         endereco.setCep(enderecoDTO.cep());
         endereco.setComplemento(enderecoDTO.complemento());
+        endereco.setEstado(enderecoDTO.estado());
     }
 }

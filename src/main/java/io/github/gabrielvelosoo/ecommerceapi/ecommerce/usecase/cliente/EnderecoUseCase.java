@@ -8,6 +8,7 @@ import java.util.List;
 public interface EnderecoUseCase {
 
     EnderecoResponseDTO salvarEndereco(EnderecoRequestDTO enderecoDTO);
+    EnderecoResponseDTO obterEnderecoPorId(Long enderecoId);
     List<EnderecoResponseDTO> obterEnderecosUsuarioLogado();
     EnderecoResponseDTO editarEndereco(Long enderecoId, EnderecoRequestDTO enderecoDTO);
     void deletarEndereco(Long enderecoId);

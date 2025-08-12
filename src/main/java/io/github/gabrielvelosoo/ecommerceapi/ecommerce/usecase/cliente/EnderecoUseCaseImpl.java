@@ -37,6 +37,12 @@ public class EnderecoUseCaseImpl implements EnderecoUseCase {
     }
 
     @Override
+    public EnderecoResponseDTO obterEnderecoPorId(Long enderecoId) {
+        Endereco endereco = enderecoService.obterEnderecoPorId(enderecoId);
+        return enderecoMapper.toDTO(endereco);
+    }
+
+    @Override
     public List<EnderecoResponseDTO> obterEnderecosUsuarioLogado() {
         Usuario usuario = usuarioService.obterUsuarioLogado();
         List<Endereco> enderecos = enderecoService.obterEnderecosUsuarioLogado(usuario.getId());
