@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
+import java.text.Normalizer;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,9 @@ public class Categoria implements Serializable {
 
     @Column(nullable = false, unique = true, length = 50)
     private String nome;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String slug;
 
     @ManyToOne
     @JoinColumn(name = "categoria_pai_id")
@@ -46,10 +50,21 @@ public class Categoria implements Serializable {
 
     public Categoria(String nome) {
         this.nome = nome;
+        this.slug = gerarSlug(nome);
     }
 
     public Categoria(String nome, Categoria categoriaPai) {
         this.nome = nome;
         this.categoriaPai = categoriaPai;
+        this.slug = gerarSlug(nome);
+    }
+
+    private String gerarSlug(String str) {
+        if (str == null) return null;
+        return Normalizer.normalize(str, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "")
+                .toLowerCase()
+                .replaceAll("\\s+", "-")
+                .replaceAll("[^\\w-]", "");
     }
 }
