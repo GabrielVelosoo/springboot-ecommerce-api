@@ -9,4 +9,5 @@ public interface CategoriaUseCase {
 
     CategoriaResponseDTO salvarCategoria(CategoriaRequestDTO categoriaDTO);
     List<CategoriaResponseDTO> obterCategoriasRaizes();
+    CategoriaResponseDTO obterCategoriaPorSlug(String slug);
 }

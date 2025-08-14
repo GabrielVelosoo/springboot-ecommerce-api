@@ -3,6 +3,7 @@ package io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
@@ -21,8 +22,8 @@ public record ProdutoRequestDTO(
         @NotNull(message = "Quantidade é obrigatório")
         Integer quantidadeEstoque,
 
-        @NotBlank(message = "Imagem é obrigatório")
-        String imagemUrl,
+        @NotNull(message = "Imagem é obrigatório")
+        MultipartFile imagem,
 
         @NotNull(message = "Categoria é obrigatório")
         Long categoriaId

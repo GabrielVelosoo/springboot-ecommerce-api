@@ -9,8 +9,15 @@ import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.custom.produto.
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.UUID;
 
 import static io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.spec.ProdutoSpecification.*;
 
@@ -23,8 +30,16 @@ public class ProdutoUseCaseImpl implements ProdutoUseCase {
     private final ProdutoValidator produtoValidator;
 
     @Override
-    public ProdutoResponseDTO salvarProduto(ProdutoRequestDTO produtoDTO) {
+    public ProdutoResponseDTO salvarProduto(ProdutoRequestDTO produtoDTO) throws IOException {
+        MultipartFile imagem = produtoDTO.imagem();
+        String uploadDir = "uploads/";
+        String nomeArquivo = UUID.randomUUID() + "_" + imagem.getOriginalFilename();
+        Path caminho = Paths.get(uploadDir + nomeArquivo);
+        Files.createDirectories(caminho.getParent());
+        Files.copy(imagem.getInputStream(), caminho, StandardCopyOption.REPLACE_EXISTING);
+
         Produto produto = produtoMapper.toEntity(produtoDTO);
+        produto.setImagemUrl("/uploads/" + nomeArquivo);
         produtoValidator.validar(produto);
         Produto produtoSalvo = produtoService.salvaProduto(produto);
         return produtoMapper.toDTO(produtoSalvo);

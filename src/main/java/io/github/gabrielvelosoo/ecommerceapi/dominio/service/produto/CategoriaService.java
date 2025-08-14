@@ -9,4 +9,5 @@ public interface CategoriaService {
     Categoria salvarCategoria(Categoria categoria);
     List<Categoria> obterCategoriasRaizes();
     Categoria obterCategoriaPorId(Long id);
+    Categoria obterCategoriaPorSlug(String slug);
 }

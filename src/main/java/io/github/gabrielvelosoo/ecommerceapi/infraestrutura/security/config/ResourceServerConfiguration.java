@@ -8,6 +8,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
@@ -35,6 +36,7 @@ public class ResourceServerConfiguration {
                     authorize.requestMatchers(HttpMethod.POST, "/api/clientes/**").permitAll();
                     authorize.requestMatchers("/api/categorias/**").permitAll();
                     authorize.requestMatchers("/api/produtos/**").permitAll();
+                    authorize.requestMatchers("/uploads/**").permitAll();
                     authorize.requestMatchers(HttpMethod.POST, "/api/oauth-clients/**").permitAll();
                     authorize.requestMatchers("/h2-console/**").permitAll();
                     authorize.anyRequest().authenticated();
@@ -49,6 +51,13 @@ public class ResourceServerConfiguration {
                 )
                 .addFilterAfter(jwtCustomAuthenticationFilter, BearerTokenAuthenticationFilter.class)
                 .build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return web -> web.ignoring().requestMatchers(
+                "/uploads/**"
+        );
     }
 
     @Bean

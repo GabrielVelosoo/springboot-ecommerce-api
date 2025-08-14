@@ -37,4 +37,10 @@ public class CategoriaServiceImpl implements CategoriaService {
         return categoriaRepository.findById(id)
                 .orElseThrow( () -> new RegistroNaoEncontradoException("Categoria não encontrada"));
     }
+
+    @Override
+    public Categoria obterCategoriaPorSlug(String slug) {
+        return categoriaRepository.findBySlug(slug)
+                .orElseThrow( () -> new RegistroNaoEncontradoException("Categoria não encontrada") );
+    }
 }

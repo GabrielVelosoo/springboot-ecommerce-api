@@ -6,9 +6,11 @@ import io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.produto.ProdutoUs
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.controller.GenericController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -19,8 +21,8 @@ public class ProdutoController implements GenericController {
 
     private final ProdutoUseCase produtoUseCase;
 
-    @PostMapping
-    public ResponseEntity<ProdutoResponseDTO> salvarProduto(@RequestBody @Valid ProdutoRequestDTO produtoDTO) {
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ProdutoResponseDTO> salvarProduto(@ModelAttribute @Valid ProdutoRequestDTO produtoDTO) throws IOException {
         ProdutoResponseDTO produtoDTOResponse = produtoUseCase.salvarProduto(produtoDTO);
         URI location = gerarHeaderLocation(produtoDTOResponse.id());
         return ResponseEntity.created(location).body(produtoDTOResponse);

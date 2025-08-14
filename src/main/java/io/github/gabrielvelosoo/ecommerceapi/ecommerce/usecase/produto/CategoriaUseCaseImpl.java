@@ -36,4 +36,10 @@ public class CategoriaUseCaseImpl implements CategoriaUseCase {
         List<Categoria> categorias = categoriaService.obterCategoriasRaizes();
         return categoriaMapper.toDTOs(categorias);
     }
+
+    @Override
+    public CategoriaResponseDTO obterCategoriaPorSlug(String slug) {
+        Categoria categoria = categoriaService.obterCategoriaPorSlug(slug);
+        return categoriaMapper.toDTO(categoria);
+    }
 }

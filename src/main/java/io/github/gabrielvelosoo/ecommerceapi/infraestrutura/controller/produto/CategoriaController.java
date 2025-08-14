@@ -31,4 +31,10 @@ public class CategoriaController implements GenericController {
         List<CategoriaResponseDTO> categoriasDTO = categoriaUseCase.obterCategoriasRaizes();
         return ResponseEntity.ok(categoriasDTO);
     }
+
+    @GetMapping("/{slug}")
+    public ResponseEntity<CategoriaResponseDTO> getCategoriaIdPorSlug(@PathVariable(name = "slug") String slug) {
+        CategoriaResponseDTO categoriaDTO = categoriaUseCase.obterCategoriaPorSlug(slug);
+        return ResponseEntity.ok(categoriaDTO);
+    }
 }

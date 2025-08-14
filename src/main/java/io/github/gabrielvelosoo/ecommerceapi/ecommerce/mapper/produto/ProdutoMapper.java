@@ -18,6 +18,7 @@ public abstract class ProdutoMapper {
     CategoriaRepository categoriaRepository;
 
     @Mapping(target = "categoria", expression = "java( categoriaRepository.findById(produtoDTO.categoriaId()).orElse(null) )")
+    @Mapping(target = "imagemUrl", ignore = true)
     public abstract Produto toEntity(ProdutoRequestDTO produtoDTO);
 
     public abstract ProdutoResponseDTO toDTO(Produto produto);
@@ -28,7 +29,6 @@ public abstract class ProdutoMapper {
         produto.setDescricao(produtoDTO.descricao());
         produto.setPreco(produtoDTO.preco());
         produto.setQuantidadeEstoque(produtoDTO.quantidadeEstoque());
-        produto.setImagemUrl(produtoDTO.imagemUrl());
         produto.setCategoria(categoriaRepository.findById(produtoDTO.categoriaId()).orElseThrow( () -> new RegistroNaoEncontradoException("Categoria não encontrada") ));
     }
 }
