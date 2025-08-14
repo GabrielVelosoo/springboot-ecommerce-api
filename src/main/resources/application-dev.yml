@@ -17,3 +17,8 @@ spring:
   web:
     resources:
       static-locations: file:uploads/
+
+app:
+  upload:
+    dir: uploads
+    url-prefix: /uploads/
