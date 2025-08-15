@@ -1,3 +1,8 @@
 spring:
   application:
     name: E-commerce API
+
+app:
+  upload:
+    dir: uploads
+    url-prefix: /uploads/
