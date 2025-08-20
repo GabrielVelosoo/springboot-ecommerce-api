@@ -3,11 +3,13 @@ package io.github.gabrielvelosoo.ecommerceapi.infraestrutura.controller.produto;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.ProdutoRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.ProdutoResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.produto.ProdutoUseCase;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.groups.OrdemValidacao;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.controller.GenericController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -21,8 +23,8 @@ public class ProdutoController implements GenericController {
 
     private final ProdutoUseCase produtoUseCase;
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ProdutoResponseDTO> salvarProduto(@ModelAttribute @Valid ProdutoRequestDTO produtoDTO) throws IOException {
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<ProdutoResponseDTO> salvarProduto(@ModelAttribute @Validated(OrdemValidacao.class) ProdutoRequestDTO produtoDTO) throws IOException {
         ProdutoResponseDTO produtoDTOResponse = produtoUseCase.salvarProduto(produtoDTO);
         URI location = gerarHeaderLocation(produtoDTOResponse.id());
         return ResponseEntity.created(location).body(produtoDTOResponse);
