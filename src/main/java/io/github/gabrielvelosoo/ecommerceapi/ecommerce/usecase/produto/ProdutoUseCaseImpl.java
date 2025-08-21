@@ -8,6 +8,9 @@ import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.ProdutoRespon
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.produto.ProdutoMapper;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.custom.produto.ProdutoValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -36,10 +39,15 @@ public class ProdutoUseCaseImpl implements ProdutoUseCase {
     }
 
     @Override
-    public List<ProdutoResponseDTO> obterProdutosPorNome(String produtoNome) {
+    public Page<ProdutoResponseDTO> obterProdutosPorNome(String produtoNome, Integer pagina, Integer tamanhaPagina) {
         Specification<Produto> spec = Specification.where(filtrarPorNome(produtoNome));
-        List<Produto> produtos = produtoService.obterProdutosPorNome(spec);
-        return produtoMapper.toDTOs(produtos);
+        Pageable paginacao = paginacaoProduto(pagina, tamanhaPagina);
+        Page<Produto> produtos = produtoService.obterProdutosPorNome(spec, paginacao);
+        return produtos.map(produtoMapper::toDTO);
+    }
+
+    private Pageable paginacaoProduto(Integer pagina, Integer tamanhoPagina) {
+        return PageRequest.of(pagina, tamanhoPagina);
     }
 
     @Override

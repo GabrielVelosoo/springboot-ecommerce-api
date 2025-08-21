@@ -7,6 +7,7 @@ import io.github.gabrielvelosoo.ecommerceapi.ecommerce.validator.groups.OrdemVal
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.controller.GenericController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -31,8 +32,11 @@ public class ProdutoController implements GenericController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProdutoResponseDTO>> obterProdutosPorNome(@RequestParam(value = "nome", required = false) String produtoNome) {
-        List<ProdutoResponseDTO> produtosDTO = produtoUseCase.obterProdutosPorNome(produtoNome);
+    public ResponseEntity<Page<ProdutoResponseDTO>> obterProdutosPorNome(@RequestParam(value = "nome", required = false) String produtoNome,
+                                                                         @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
+                                                                         @RequestParam(value = "tamanho-pagina", defaultValue = "10") Integer tamanhaPagina
+    ) {
+        Page<ProdutoResponseDTO> produtosDTO = produtoUseCase.obterProdutosPorNome(produtoNome, pagina, tamanhaPagina);
         return ResponseEntity.ok(produtosDTO);
     }
 

@@ -5,6 +5,8 @@ import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.Categori
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.ProdutoRepository;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.exception.excecoes.RegistroNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +31,8 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public List<Produto> obterProdutosPorNome(Specification<Produto> spec) {
-        return produtoRepository.findAll(spec);
+    public Page<Produto> obterProdutosPorNome(Specification<Produto> spec, Pageable paginacao) {
+        return produtoRepository.findAll(spec, paginacao);
     }
 
     @Override
