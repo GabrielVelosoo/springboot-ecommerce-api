@@ -31,7 +31,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public Page<Produto> obterProdutosPorNome(Specification<Produto> spec, Pageable paginacao) {
+    public Page<Produto> obterProdutos(Specification<Produto> spec, Pageable paginacao) {
         return produtoRepository.findAll(spec, paginacao);
     }
 

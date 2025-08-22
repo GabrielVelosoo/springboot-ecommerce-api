@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
@@ -25,37 +26,50 @@ public class ProdutoController implements GenericController {
     private final ProdutoUseCase produtoUseCase;
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<ProdutoResponseDTO> salvarProduto(@ModelAttribute @Validated(OrdemValidacao.class) ProdutoRequestDTO produtoDTO) throws IOException {
+    public ResponseEntity<ProdutoResponseDTO> salvarProduto(
+            @ModelAttribute @Validated(OrdemValidacao.class) ProdutoRequestDTO produtoDTO
+    ) throws IOException {
         ProdutoResponseDTO produtoDTOResponse = produtoUseCase.salvarProduto(produtoDTO);
         URI location = gerarHeaderLocation(produtoDTOResponse.id());
         return ResponseEntity.created(location).body(produtoDTOResponse);
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProdutoResponseDTO>> obterProdutosPorNome(@RequestParam(value = "nome", required = false) String produtoNome,
-                                                                         @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
-                                                                         @RequestParam(value = "tamanho-pagina", defaultValue = "10") Integer tamanhaPagina
+    public ResponseEntity<Page<ProdutoResponseDTO>> obterProdutosPorNome(
+            @RequestParam(value = "nome", required = false) String nome,
+            @RequestParam(value = "precoMin", required = false) BigDecimal precoMin,
+            @RequestParam(value = "precoMax", required = false) BigDecimal precoMax,
+            @RequestParam(value = "estoqueMin", required = false) Integer estoqueMin,
+            @RequestParam(value = "estoqueMax", required = false) Integer estoqueMax,
+            @RequestParam(value = "categoriaId", required = false) Long categoriaId,
+            @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
+            @RequestParam(value = "tamanho-pagina", defaultValue = "10") Integer tamanhaPagina
     ) {
-        Page<ProdutoResponseDTO> produtosDTO = produtoUseCase.obterProdutosPorNome(produtoNome, pagina, tamanhaPagina);
+        Page<ProdutoResponseDTO> produtosDTO = produtoUseCase.obterProdutos(nome, precoMin, precoMax, estoqueMin, estoqueMax, categoriaId, pagina, tamanhaPagina);
         return ResponseEntity.ok(produtosDTO);
     }
 
     @GetMapping(value = "/categorias/{id}")
-    public ResponseEntity<List<ProdutoResponseDTO>> obterProdutosPorCategoria(@PathVariable(name = "id") Long categoriaId) {
+    public ResponseEntity<List<ProdutoResponseDTO>> obterProdutosPorCategoria(
+            @PathVariable(name = "id") Long categoriaId
+    ) {
         List<ProdutoResponseDTO> protudosDTO = produtoUseCase.obterProdutosPorCategoria(categoriaId);
         return ResponseEntity.ok(protudosDTO);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProdutoResponseDTO> editarProduto(@PathVariable(name = "id") Long produtoId,
-                                                            @RequestBody @Valid ProdutoRequestDTO produtoDTO
+    public ResponseEntity<ProdutoResponseDTO> editarProduto(
+            @PathVariable(name = "id") Long produtoId,
+            @RequestBody @Valid ProdutoRequestDTO produtoDTO
     ) {
         ProdutoResponseDTO produtoDTOResponse = produtoUseCase.editarProduto(produtoId, produtoDTO);
         return ResponseEntity.ok(produtoDTOResponse);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deletarProduto(@PathVariable(name = "id") Long produtoId) {
+    public ResponseEntity<Void> deletarProduto(
+            @PathVariable(name = "id") Long produtoId
+    ) {
         produtoUseCase.deletarProduto(produtoId);
         return ResponseEntity.noContent().build();
     }

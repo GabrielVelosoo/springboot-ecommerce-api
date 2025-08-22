@@ -11,7 +11,7 @@ public interface ProdutoService {
 
     Produto salvaProduto(Produto produto);
     Produto obterProdutoPorId(Long produtoId);
-    Page<Produto> obterProdutosPorNome(Specification<Produto> spec, Pageable paginacao);
+    Page<Produto> obterProdutos(Specification<Produto> spec, Pageable paginacao);
     List<Produto> obterProdutosPorCategoria(Long categoriaId);
     Produto editarProduto(Produto produto);
     void deletarProduto(Produto produto);

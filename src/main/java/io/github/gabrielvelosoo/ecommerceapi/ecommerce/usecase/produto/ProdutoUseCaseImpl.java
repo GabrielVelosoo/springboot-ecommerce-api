@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.spec.ProdutoSpecification.*;
@@ -39,11 +40,43 @@ public class ProdutoUseCaseImpl implements ProdutoUseCase {
     }
 
     @Override
-    public Page<ProdutoResponseDTO> obterProdutosPorNome(String produtoNome, Integer pagina, Integer tamanhaPagina) {
-        Specification<Produto> spec = Specification.where(filtrarPorNome(produtoNome));
+    public Page<ProdutoResponseDTO> obterProdutos(
+            String nome,
+            BigDecimal precoMin,
+            BigDecimal precoMax,
+            Integer estoqueMin,
+            Integer estoqueMax,
+            Long categoriaId,
+            Integer pagina,
+            Integer tamanhaPagina
+    ) {
+        Specification<Produto> specs = construirFiltros(nome, precoMin, precoMax, estoqueMin, estoqueMax, categoriaId);
         Pageable paginacao = paginacaoProduto(pagina, tamanhaPagina);
-        Page<Produto> produtos = produtoService.obterProdutosPorNome(spec, paginacao);
+        Page<Produto> produtos = produtoService.obterProdutos(specs, paginacao);
         return produtos.map(produtoMapper::toDTO);
+    }
+
+    private Specification<Produto> construirFiltros(String nome, BigDecimal precoMin, BigDecimal precoMax, Integer estoqueMin, Integer estoqueMax, Long categoriaId) {
+        Specification<Produto> specs = Specification.where( (root, query, cb) -> cb.conjunction() );
+        if(nome != null) {
+            specs = specs.and(nomeLike(nome));
+        }
+        if(precoMin != null) {
+            specs = specs.and(precoMaiorOuIgual(precoMin));
+        }
+        if(precoMax != null) {
+            specs = specs.and(precoMenorOuIgual(precoMax));
+        }
+        if(estoqueMin != null) {
+            specs = specs.and(estoqueMaiorOuIgual(estoqueMin));
+        }
+        if(estoqueMax != null) {
+            specs = specs.and(estoqueMenorOuIgual(estoqueMax));
+        }
+        if(categoriaId != null) {
+            specs = specs.and(categoriaIgual(categoriaId));
+        }
+        return specs;
     }
 
     private Pageable paginacaoProduto(Integer pagina, Integer tamanhoPagina) {
