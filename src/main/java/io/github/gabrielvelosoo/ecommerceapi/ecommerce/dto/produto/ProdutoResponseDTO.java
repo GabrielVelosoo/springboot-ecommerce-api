@@ -9,6 +9,7 @@ public record ProdutoResponseDTO(
         BigDecimal preco,
         Integer quantidadeEstoque,
         String imagemUrl,
-        CategoriaResponseDTO categoria
+        CategoriaResponseDTO categoria,
+        String categoriaPath
     ) {
 }

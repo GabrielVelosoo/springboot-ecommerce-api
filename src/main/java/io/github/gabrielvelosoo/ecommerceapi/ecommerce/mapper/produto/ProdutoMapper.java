@@ -1,5 +1,6 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.produto;
 
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.produto.Categoria;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.produto.Produto;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.produto.CategoriaRepository;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.produto.ProdutoRequestDTO;
@@ -21,6 +22,7 @@ public abstract class ProdutoMapper {
     @Mapping(target = "imagemUrl", ignore = true)
     public abstract Produto toEntity(ProdutoRequestDTO produtoDTO);
 
+    @Mapping(target = "categoriaPath", expression = "java(montarCategoriaPath(produto.getCategoria()))")
     public abstract ProdutoResponseDTO toDTO(Produto produto);
     public abstract List<ProdutoResponseDTO> toDTOs(List<Produto> produtos);
 
@@ -30,5 +32,13 @@ public abstract class ProdutoMapper {
         produto.setPreco(produtoDTO.preco());
         produto.setQuantidadeEstoque(produtoDTO.quantidadeEstoque());
         produto.setCategoria(categoriaRepository.findById(produtoDTO.categoriaId()).orElseThrow( () -> new RegistroNaoEncontradoException("Categoria não encontrada") ));
+    }
+
+    public String montarCategoriaPath(Categoria categoria) {
+        if(categoria == null) return "";
+        if(categoria.getCategoriaPai() != null) {
+            return categoria.getCategoriaPai().getNome() + " > " + categoria.getNome();
+        }
+        return categoria.getNome();
     }
 }
