@@ -1,34 +1,23 @@
 package io.github.gabrielvelosoo.ecommerceapi.infraestrutura.email.service;
 
+import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.email.dto.BrevoEmailRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.email.dto.EmailRequestDTO;
+import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.email.mapper.EmailMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
     private final WebClient webClient;
+    private final EmailMapper emailMapper;
 
     @Override
     public Mono<String> enviarEmail(EmailRequestDTO emailRequestDTO) {
-        Map<String, Object> body = Map.of(
-                "sender", Map.of(
-                        "name", emailRequestDTO.fromName(),
-                        "email", emailRequestDTO.fromEmail()
-                ),
-                "to", emailRequestDTO.toEmails().stream()
-                        .map(email -> Map.of("email", email))
-                        .collect(Collectors.toList()),
-                "subject", emailRequestDTO.subject(),
-                "htmlContent", emailRequestDTO.htmlContent()
-        );
-
+        BrevoEmailRequestDTO body = emailMapper.toBrevoRequest(emailRequestDTO);
         return webClient.post()
                 .uri("/smtp/email")
                 .bodyValue(body)
