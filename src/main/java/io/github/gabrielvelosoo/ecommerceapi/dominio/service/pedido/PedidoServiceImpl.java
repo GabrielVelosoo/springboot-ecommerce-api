@@ -3,17 +3,21 @@ package io.github.gabrielvelosoo.ecommerceapi.dominio.service.pedido;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.pedido.ItemPedido;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.pedido.Pedido;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.repository.pedido.PedidoRepository;
+import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.event.PedidoCriadoEvent;
 import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.exception.excecoes.RegistroNaoEncontradoException;
+import io.github.gabrielvelosoo.ecommerceapi.infraestrutura.kafka.producer.PedidoProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
 public class PedidoServiceImpl implements PedidoService {
 
     private final PedidoRepository pedidoRepository;
+    private final PedidoProducer pedidoProducer;
 
     @Override
     public Pedido criarPedido(Pedido pedido) {
@@ -22,7 +26,17 @@ public class PedidoServiceImpl implements PedidoService {
                 item.setPedido(pedido);
             }
         }
-        return pedidoRepository.save(pedido);
+        Pedido pedidoSalvo = pedidoRepository.save(pedido);
+
+        PedidoCriadoEvent event = new PedidoCriadoEvent(
+                pedidoSalvo.getId(),
+                pedidoSalvo.getCliente().getId(),
+                Instant.now(),
+                1
+        );
+
+        pedidoProducer.publicarPedidoCriado(event);
+        return pedidoSalvo;
     }
 
     @Override

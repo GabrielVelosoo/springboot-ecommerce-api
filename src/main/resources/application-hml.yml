@@ -22,3 +22,8 @@ spring:
 brevo:
   api:
     key: ${MAIL_API_KEY}
+
+email:
+  from:
+    name: ${EMAIL_FROM_NAME}
+    address: ${EMAIL_FROM_ADDRESS}
