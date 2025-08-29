@@ -3,6 +3,7 @@ package io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.pedido;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.carrinho.Carrinho;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.carrinho.ItemCarrinho;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Cliente;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Endereco;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.pedido.FormaPagamento;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.pedido.ItemPedido;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.pedido.Pedido;
@@ -38,12 +39,15 @@ public abstract class PedidoMapper {
     public abstract PedidoResponseDTO toDTO(Pedido pedido);
 
     public Pedido toEntity(PedidoRequestDTO pedidoDTO) {
+        Cliente cliente = clienteService.obterClientePorId(2L);
+        Endereco endereco = enderecoMapper.toEntity(pedidoDTO.enderecoEntrega());
+        endereco.setCliente(cliente);
         Pedido pedido = new Pedido();
         pedido.setCliente(clienteService.obterClientePorId(pedidoDTO.clienteId()));
         pedido.setItens(mapItensPedido(pedidoDTO.itens()));
         pedido.setFormaPagamento(pedidoDTO.formaPagamento());
         pedido.setStatus(StatusPedido.PENDENTE);
-        pedido.setEnderecoEntrega(enderecoMapper.toEntity(pedidoDTO.enderecoEntrega()));
+        pedido.setEnderecoEntrega(endereco);
         pedido.setFrete(BigDecimal.ZERO);
         return pedido;
     }

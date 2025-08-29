@@ -36,6 +36,7 @@ public class ResourceServerConfiguration {
                     authorize.requestMatchers(HttpMethod.POST, "/api/clientes/**").permitAll();
                     authorize.requestMatchers("/api/categorias/**").permitAll();
                     authorize.requestMatchers("/api/produtos/**").permitAll();
+                    authorize.requestMatchers("/api/pedidos/**").permitAll();
                     authorize.requestMatchers("/api/emails/**").permitAll();
                     authorize.requestMatchers("/uploads/**").permitAll();
                     authorize.requestMatchers(HttpMethod.POST, "/api/oauth-clients/**").permitAll();

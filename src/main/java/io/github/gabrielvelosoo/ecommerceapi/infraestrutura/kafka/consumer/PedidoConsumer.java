@@ -22,7 +22,7 @@ public class PedidoConsumer {
     private final ClienteUseCase clienteUseCase;
     private final EmailMapper emailMapper;
 
-    @KafkaListener(topics = "pedidos-criados", groupId = "email-group")
+    @KafkaListener(topics = "pedidos-criados", groupId = "email-group", containerFactory = "kafkaListenerContainerFactory")
     public void consumir(PedidoCriadoEvent event) {
         System.out.println("Mensagem recebida do Kafka: " + event.pedidoId());
         try {
