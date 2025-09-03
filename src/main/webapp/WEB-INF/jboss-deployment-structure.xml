@@ -1,0 +1,7 @@
+<jboss-deployment-structure>
+    <deployment>
+        <exclusions>
+            <module name="ch.qos.logback" />
+        </exclusions>
+    </deployment>
+</jboss-deployment-structure>
