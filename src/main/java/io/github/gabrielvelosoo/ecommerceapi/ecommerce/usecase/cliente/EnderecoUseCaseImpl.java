@@ -2,10 +2,8 @@ package io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.cliente;
 
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Cliente;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Endereco;
-import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario.Usuario;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.cliente.ClienteService;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.cliente.EnderecoService;
-import io.github.gabrielvelosoo.ecommerceapi.dominio.service.usuario.UsuarioService;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.EnderecoResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.cliente.EnderecoMapper;

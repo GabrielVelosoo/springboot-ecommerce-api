@@ -16,6 +16,21 @@ spring:
     consumer:
       group-id: email-group
       auto-offset-reset: earliest
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: ecommerce-api
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/EcommerceKeycloack
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/EcommerceKeycloack
 
 brevo:
   api:

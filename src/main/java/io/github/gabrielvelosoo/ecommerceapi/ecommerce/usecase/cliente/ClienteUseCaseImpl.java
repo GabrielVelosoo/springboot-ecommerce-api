@@ -1,10 +1,7 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.cliente;
 
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Cliente;
-import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario.Role;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.cliente.ClienteService;
-import io.github.gabrielvelosoo.ecommerceapi.dominio.service.usuario.RoleService;
-import io.github.gabrielvelosoo.ecommerceapi.dominio.service.usuario.UsuarioService;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteResponseDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.mapper.cliente.ClienteMapper;

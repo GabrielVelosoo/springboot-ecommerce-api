@@ -2,7 +2,6 @@ package io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.carrinho.Carrinho;
-import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
