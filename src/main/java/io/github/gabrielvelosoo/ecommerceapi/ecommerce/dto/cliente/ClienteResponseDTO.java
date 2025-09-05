@@ -9,7 +9,6 @@ import java.time.LocalDate;
 public record ClienteResponseDTO(
         Long id,
         String email,
-        String senha,
         String nome,
         String sobrenome,
 

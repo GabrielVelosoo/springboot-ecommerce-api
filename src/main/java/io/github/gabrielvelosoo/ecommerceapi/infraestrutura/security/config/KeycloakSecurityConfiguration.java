@@ -2,7 +2,6 @@ package io.github.gabrielvelosoo.ecommerceapi.infraestrutura.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,7 +23,7 @@ public class KeycloakSecurityConfiguration {
                         headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
                 )
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers(HttpMethod.POST, "/api/clientes/**").permitAll();
+                    auth.requestMatchers("/api/clientes/**").permitAll();
                     auth.requestMatchers("/api/categorias/**").permitAll();
                     auth.requestMatchers("/api/produtos/**").permitAll();
                     auth.requestMatchers("/api/pedidos/**").permitAll();
