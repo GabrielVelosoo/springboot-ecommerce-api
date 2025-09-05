@@ -28,10 +28,12 @@
     <packaging>war</packaging>
 
     <repositories>
+
         <repository>
             <id>central</id>
             <url>https://repo1.maven.org/maven2/</url>
         </repository>
+
     </repositories>
 
     <properties>
@@ -109,6 +111,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-admin-client</artifactId>
+            <version>26.0.6</version>
         </dependency>
 
         <dependency>

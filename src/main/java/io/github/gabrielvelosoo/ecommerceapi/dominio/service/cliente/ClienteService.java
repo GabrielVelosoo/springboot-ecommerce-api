@@ -6,6 +6,7 @@ public interface ClienteService {
 
     Cliente salvarCliente(Cliente cliente);
     Cliente obterClientePorId(Long id);
+    Cliente obterClientePorKeycloakUsuarioId(String keycloakUsuarioId);
     Cliente editarCliente(Cliente cliente);
     void deletarCliente(Cliente cliente);
 }

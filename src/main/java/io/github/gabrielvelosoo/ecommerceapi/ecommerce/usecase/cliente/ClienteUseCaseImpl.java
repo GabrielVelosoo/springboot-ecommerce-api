@@ -1,6 +1,7 @@
 package io.github.gabrielvelosoo.ecommerceapi.ecommerce.usecase.cliente;
 
 import io.github.gabrielvelosoo.ecommerceapi.dominio.entity.cliente.Cliente;
+import io.github.gabrielvelosoo.ecommerceapi.dominio.service.auth.IdentidadeService;
 import io.github.gabrielvelosoo.ecommerceapi.dominio.service.cliente.ClienteService;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteRequestDTO;
 import io.github.gabrielvelosoo.ecommerceapi.ecommerce.dto.cliente.ClienteResponseDTO;
@@ -15,8 +16,7 @@ import org.springframework.stereotype.Service;
 public class ClienteUseCaseImpl implements ClienteUseCase {
 
     private final ClienteService clienteService;
-    private final UsuarioService usuarioService;
-    private final RoleService roleService;
+    private final IdentidadeService identidadeService;
     private final ClienteMapper clienteMapper;
     private final ClienteValidator clienteValidator;
 
@@ -25,9 +25,14 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
     public ClienteResponseDTO salvarCliente(ClienteRequestDTO clienteDTO) {
         Cliente cliente = clienteMapper.toEntityComCarrinho(clienteDTO);
         clienteValidator.validar(cliente);
+        String keycloakUsuarioId = identidadeService.criarUsuario(
+                clienteDTO.email(),
+                clienteDTO.senha(),
+                clienteDTO.nome(),
+                clienteDTO.sobrenome()
+        );
+        cliente.setKeycloakUsuarioId(keycloakUsuarioId);
         Cliente clienteSalvo = clienteService.salvarCliente(cliente);
-        Role role = roleService.obterRolePorNome("USER");
-        usuarioService.adicionarRoleUser(clienteSalvo, role);
         return clienteMapper.toDTO(clienteSalvo);
     }
 

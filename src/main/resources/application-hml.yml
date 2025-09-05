@@ -7,7 +7,7 @@ spring:
     show-sql: true
     open-in-view: false
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
@@ -26,11 +26,11 @@ spring:
             scope: openid
         provider:
           keycloak:
-            issuer-uri: http://localhost:8080/realms/EcommerceKeycloack
+            issuer-uri: http://localhost:8080/realms/ecommerce
             user-name-attribute: preferred_username
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/EcommerceKeycloack
+          issuer-uri: http://localhost:8080/realms/ecommerce
 
 brevo:
   api:
@@ -40,3 +40,10 @@ email:
   from:
     name: ${EMAIL_FROM_NAME}
     address: ${EMAIL_FROM_ADDRESS}
+
+keycloak:
+  auth-server-url: http://localhost:8080
+  realm: ecommerce
+  client-id: ecommerce-api
+  admin-username: ${KEYCLOAK_ADMIN_USER}
+  admin-password: ${KEYCLOAK_ADMIN_PASSWORD}

@@ -14,13 +14,23 @@ import java.util.List;
 @Table(name = "tb_cliente")
 @Getter
 @Setter
-public class Cliente extends Usuario {
+public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String nome;
 
     @Column(nullable = false, length = 100)
     private String sobrenome;
+
+    @Column(nullable = false)
+    private String keycloakUsuarioId;
+
+    @Column(nullable = false)
+    private String email;
 
     @Column(nullable = false, unique = true, length = 11)
     private String cpf;
